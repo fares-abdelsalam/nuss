@@ -1,0 +1,42 @@
+{
+  "name": "nuss",
+  "version": "0.1.0",
+  "private": true,
+  "scripts": {
+    "dev": "next dev",
+    "build": "next build",
+    "start": "next start",
+    "lint": "eslint",
+    "seed:dictionaries": "node scripts/seed-dictionaries.mjs",
+    "schema:push": "node scripts/seed-dictionaries.mjs --schema-only"
+  },
+  "dependencies": {
+    "@ant-design/icons": "^6.2.2",
+    "@payloadcms/db-postgres": "^3.84.1",
+    "@payloadcms/live-preview-react": "^3.84.1",
+    "@payloadcms/next": "^3.84.1",
+    "@payloadcms/richtext-lexical": "^3.84.1",
+    "@payloadcms/storage-s3": "^3.84.1",
+    "clsx": "^2.1.1",
+    "framer-motion": "^12.34.3",
+    "lucide-react": "^0.576.0",
+    "next": "^16.2.2",
+    "payload": "^3.84.1",
+    "pg": "^8.20.0",
+    "react": "19.2.3",
+    "react-dom": "19.2.3",
+    "react-fast-marquee": "^1.6.5",
+    "react-icons": "^5.5.0",
+    "tailwind-merge": "^3.5.0",
+    "tailwindcss": "^4.2.1"
+  },
+  "devDependencies": {
+    "@types/node": "^20",
+    "@types/react": "^19",
+    "@types/react-dom": "^19",
+    "eslint": "^9",
+    "eslint-config-next": "^16.2.2",
+    "tsx": "^4.21.0",
+    "typescript": "^5"
+  }
+}

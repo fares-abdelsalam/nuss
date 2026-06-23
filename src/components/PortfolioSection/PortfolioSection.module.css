@@ -1,0 +1,389 @@
+.container {
+  background-color: #000000;
+  color: #ffffff;
+  padding: 6rem 8rem;
+  min-height: 100vh;
+  display: flex;
+  flex-direction: column;
+  gap: 4rem;
+  overflow: hidden;
+}
+
+.header {
+  display: flex;
+  justify-content: space-between;
+  align-items: flex-start;
+  width: 100%;
+}
+
+.rightContent {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  gap: 1rem;
+}
+
+.nussIcon {
+  width: auto;
+  height: auto;
+}
+
+.titleWrapper {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+}
+
+.leftContent {
+  max-width: 530px;
+  display: flex;
+  flex-direction: column;
+  gap: 2rem;
+  padding-top: 8rem;
+  align-items: flex-start;
+}
+
+.tabsContainer {
+  display: flex;
+  justify-content: center;
+  border-bottom: 1px solid #333;
+  margin: auto;
+  margin-top: 2rem;
+  position: relative;
+  width: fit-content;
+  gap: 2rem;
+}
+
+.tab {
+  background: none;
+  border: none;
+  color: #888888;
+  padding: 1rem 2rem;
+  cursor: pointer;
+  position: relative;
+  transition: color 0.3s ease;
+}
+
+.activeTab {
+  color: #ffffff;
+}
+
+.activeIndicator {
+  position: absolute;
+  bottom: -1px;
+  left: 0;
+  right: 0;
+  height: 2px;
+  background-color: #7d6de9;
+}
+
+/* Desktop content area */
+.contentArea {
+  display: grid;
+  grid-template-columns: 1fr 2fr;
+  /* gap: 10rem; */
+  align-items: center;
+  margin: auto;
+  margin-top: 4rem;
+  min-height: 450px;
+}
+
+.contentLeft {
+  border-radius: 8px;
+  overflow: visible;
+  position: relative;
+  display: flex;
+  flex-direction: column;
+}
+
+.mediaContainer {
+  width: 100%;
+  aspect-ratio: 16 / 9;
+  position: relative;
+}
+
+.imageWrapper {
+  width: 100%;
+  height: 100%;
+  position: relative;
+  /* border-radius: 8px; */
+  overflow: hidden;
+}
+
+.contentImage {
+  width: 100%;
+  height: 100%;
+  object-fit: contain;
+}
+
+.contentVideo {
+  width: 100%;
+  height: 100%;
+  object-fit: contain;
+  border-radius: 8px;
+  display: block;
+}
+
+.contentRight {
+  display: flex;
+  height: 100%;
+  flex-direction: column;
+  align-items: flex-start;
+  justify-content: space-between;
+  gap: 3rem;
+}
+
+.clientLogoWrapper {
+  display: flex;
+  height: 100%;
+  flex-direction: column;
+  justify-content: space-between;
+  gap: 2rem;
+  align-items: flex-start;
+}
+
+.clientLogo {
+  width: 150px;
+  height: 80px;
+  position: relative;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.logoImage {
+  width: 100%;
+  height: auto;
+  object-fit: contain;
+}
+
+/* NAVIGATION */
+.navigation {
+  display: flex;
+  gap: 1.5rem;
+  margin-top: auto;
+  width: 100%;
+  padding-left: 0;
+  direction: ltr;
+}
+
+.navButton {
+  width: 100px;
+  height: 100px;
+  border-radius: 50%;
+  border: 1.5px solid rgba(255, 255, 255, 0.45);
+  background-color: #0A0A0A;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  cursor: pointer;
+  color: #ffffff;
+  transition: all 0.3s ease;
+}
+
+.navButton:hover:not(.disabled) {
+  border-color: rgba(255, 255, 255, 0.8);
+}
+
+.navButton.disabled {
+  opacity: 0.2;
+  cursor: default;
+}
+
+.navIcon {
+  width: 32px;
+  height: auto;
+  opacity: 0.8;
+  transition: opacity 0.3s ease;
+}
+
+.navButton:hover:not(.disabled) .navIcon {
+  opacity: 1;
+}
+
+/* Mobile carousel */
+html[dir="ltr"] .navButton {
+  transform: scaleX(-1);
+}
+
+html[dir="ltr"] .navigation {
+  flex-direction: row-reverse;
+}
+
+/* Mobile layout area base */
+.mobileContentArea {
+  display: none;
+  width: 100%;
+}
+
+@media (max-width: 480px) {
+  .container {
+    padding: 3rem 1.5rem;
+    gap: 2rem;
+  }
+
+  .header {
+    flex-direction: column;
+    align-items: center;
+    gap: 1.5rem;
+  }
+
+  .rightContent {
+    align-items: center;
+    width: 100%;
+  }
+
+  .titleWrapper {
+    align-items: center;
+  }
+
+  .leftContent {
+    padding-top: 0;
+    max-width: 100%;
+    align-items: center;
+  }
+
+  .tabsContainer {
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+    width: 100%;
+    gap: 0rem;
+    margin: unset;
+    margin-top: 1.5rem;
+    border-bottom: none;
+    padding-bottom: 0;
+  }
+
+  .tab {
+    padding: 0.75rem 0.5rem;
+    width: 100%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    border-bottom: 1px solid #333;
+    /* background-color: #0A0A0A; */
+    border-radius: 6px 6px 0 0;
+  }
+
+  .contentArea {
+    display: none;
+  }
+
+  .mobileContentArea {
+    display: flex;
+    flex-direction: column;
+    /* gap: 1.5rem; */
+    width: 100%;
+
+  }
+
+  .mobileContentInner {
+    display: flex;
+    flex-direction: column;
+    gap: 1.5rem;
+    width: 100%;
+    /* background-color: #1a1a1a; */
+    /* padding: 1.25rem; */
+    border-radius: 12px;
+  }
+
+  .mobileInfoRow {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    width: 100%;
+    /* gap: 8rem; */
+  }
+
+  .mobileLogo {
+    width: 90px;
+    height: 45px;
+    display: flex;
+    align-items: center;
+    /* justify-self: flex-start; */
+    flex-shrink: 0;
+  }
+
+  /* html[dir="rtl"] .mobileLogo {
+    justify-self: flex-end;
+  } */
+
+  .mobileLogo .logoImage {
+    width: 100%;
+    height: 100%;
+    object-fit: contain;
+  }
+
+  .mobileDescription {
+    /* flex-grow: 1; */
+    display: flex;
+    /* flex-direction: column; */
+    /* justify-content: center; */
+  }
+
+  .mobileMediaContainer {
+    background-color: #000;
+    width: 68%;
+    height: 100%;
+    position: relative;
+    overflow: hidden;
+    margin: auto;
+  }
+
+  .mobileMediaContainer .imageWrapper {
+    width: 100%;
+    height: 100%;
+  }
+
+  .mobileMediaContainer .contentImage,
+  .mobileMediaContainer .contentVideo {
+    width: 100%;
+    height: 100%;
+    object-fit: contain;
+    display: block;
+  }
+
+  .mobileNavigation {
+    display: flex;
+    justify-content: left;
+    align-items: center;
+    gap: 1rem;
+    width: 100%;
+    margin-top: 1.5rem;
+    direction: ltr;
+  }
+
+  .mobileNavButton {
+    width: 65px;
+    height: 65px;
+    border-radius: 50%;
+    border: 1.5px solid rgba(255, 255, 255, 0.45);
+    background-color: #0A0A0A;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    cursor: pointer;
+    color: #ffffff;
+    transition: all 0.3s ease;
+  }
+
+  .mobileNavButton:hover:not(.disabled) {
+    border-color: rgba(255, 255, 255, 0.8);
+  }
+
+  .mobileNavButton.disabled {
+    opacity: 0.2;
+    cursor: default;
+  }
+
+  html[dir="ltr"] .mobileNavButton {
+    transform: scaleX(-1);
+  }
+
+  .navIcon {
+    width: 18px;
+    height: auto;
+    opacity: 0.8;
+    transition: opacity 0.3s ease;
+  }
+}

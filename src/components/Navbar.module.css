@@ -1,0 +1,116 @@
+.navbar {
+  display: grid;
+  grid-template-columns: 1fr auto 1fr;
+  align-items: center;
+  padding: 1rem 4rem;
+  width: 100%;
+  position: sticky;
+  top: 0;
+  z-index: 50;
+  /* background-color: rgba(251, 245, 243, 0.5); */
+  backdrop-filter: blur(16px);
+  /* -webkit-backdrop-filter: blur(16px); */
+}
+
+.navbar,
+.navbar img,
+.navLink,
+.languageContainer {
+  transition: color 0.25s ease, filter 0.25s ease, opacity 0.2s ease;
+}
+
+.logoContainer {
+  display: flex;
+  align-items: center;
+  justify-self: start;
+  grid-column: 1; /* Explicitly place in first column */
+}
+
+.navLinks {
+  display: flex;
+  gap: 2.5rem;
+  justify-self: center;
+  grid-column: 2; /* Explicitly place in second column */
+}
+
+.navLink {
+  transition: opacity 0.2s ease, color 0.2s ease;
+  color: #706F6F;
+  background: none;
+  border: none;
+  cursor: pointer;
+  padding: 0;
+  font: inherit;
+}
+
+.navLink:hover {
+  opacity: 0.7;
+}
+
+.navLinkActive {
+  color: #1E1E1E !important;
+  opacity: 1 !important;
+}
+
+.navLinkActive:hover {
+  opacity: 1 !important;
+}
+
+.languageContainer {
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+  justify-self: end;
+  grid-column: 3;
+  cursor: pointer;
+  color: #706F6F;
+}
+
+.navbarDark .navLink,
+.navbarDark .languageContainer {
+  color: rgba(255, 255, 255, 0.72);
+}
+
+.navbarDark .navLinkActive {
+  color: #ffffff !important;
+}
+
+.navbarDark .logoContainer img,
+.navbarDark .languageContainer img {
+  filter: invert(1);
+}
+
+@media (max-width: 768px) {
+  .navbar {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 1.5rem 2rem;
+  }
+
+  /* Fixed spacer to balance the layout and keep logo centered */
+  .navbar::before {
+    content: "";
+    width: 60px; /* Approximate width of language container */
+    display: block;
+  }
+
+  .logoContainer {
+    grid-column: auto;
+    width: auto;
+    justify-content: center;
+    position: absolute;
+    left: 50%;
+    transform: translateX(-50%);
+  }
+  
+  .navLinks {
+    display: none;
+  }
+
+  .languageContainer {
+    display: flex;
+    position: relative;
+    z-index: 1;
+  }
+}

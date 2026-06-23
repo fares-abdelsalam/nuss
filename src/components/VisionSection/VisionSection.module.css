@@ -1,0 +1,373 @@
+.visionSection {
+    position: relative;
+    width: 100vw;
+    background-color: #000;
+    color: #fff;
+    min-height: 100vh;
+    /* Make component tall for scrolling effect */
+}
+
+/* Sticky Container */
+.stickyContent {
+    position: sticky;
+    top: 0;
+    height: 100vh;
+    overflow: hidden;
+    display: flex;
+    flex-direction: column;
+}
+
+.textureOverlay {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background-image: url('/texture.png');
+    background-color: lightgray;
+    background-size: cover;
+    background-repeat: no-repeat;
+    opacity: 0.66;
+    mix-blend-mode: color-dodge;
+    pointer-events: none;
+    z-index: 50;
+}
+
+/* Content Wrapper */
+.contentWrapper {
+    display: flex;
+    flex: 1;
+    position: relative;
+    z-index: 10;
+    height: 100%;
+    margin-top: -10vh;
+}
+
+html[dir="rtl"] .contentWrapper {
+    flex-direction: ltr;
+    /* Reset to strict left-to-right for layout */
+    direction: ltr;
+}
+
+html[dir="ltr"] .contentWrapper {
+    flex-direction: row-reverse;
+    direction: ltr;
+}
+
+/* --- Left Side: Media Carousel --- */
+.mediaCarouselContainer {
+    flex: 2;
+    /* Takes roughly 2/3 of space */
+    position: relative;
+    height: 100%;
+    /* display: flex; REMOVED or modified to make sure texture isn't flex-distorted */
+    overflow: hidden;
+    background-color: #000;
+    /* Ensure strict black backdrop so color-dodge cancels out in transparent gaps */
+    /* Mask/Fade Effect on the RIGHT side to blend with text area */
+    mask-image: linear-gradient(to right, black 60%, transparent 100%);
+    -webkit-mask-image: linear-gradient(to right, black 60%, transparent 100%);
+    display: flex;
+    align-items: center;
+    /* Center Vertically if needed */
+}
+
+html[dir="ltr"] .mediaCarouselContainer {
+    mask-image: linear-gradient(to left, black 60%, transparent 100%);
+    -webkit-mask-image: linear-gradient(to left, black 60%, transparent 100%);
+}
+
+.mediaTrackWrapper {
+    position: relative;
+    width: 100%;
+}
+
+.mediaTrack {
+    display: flex;
+    flex-direction: row;
+    /* Horizontal */
+    gap: 1.5rem;
+    padding: 2rem 1.5rem 2rem 0;
+    /* right padding to compensate for last gap, no left padding */
+    width: max-content;
+    will-change: transform;
+    /* Animation for infinite scrolling */
+    animation: scrollMediaHorizontal 15s linear infinite;
+}
+
+html[dir="ltr"] .mediaTrack {
+    animation-direction: reverse;
+    padding: 2rem 0 2rem 1.5rem;
+    /* left padding for LTR */
+}
+
+@keyframes scrollMediaHorizontal {
+    0% {
+        transform: translateX(0);
+    }
+
+    100% {
+        transform: translateX(-50%);
+    }
+}
+
+.mediaItem {
+    width: 600px;
+    /* Increased from 400px */
+    height: 600px;
+    /* Increased from 400px */
+    /* border-radius: 12px; */
+    overflow: hidden;
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.3);
+    flex-shrink: 0;
+}
+
+.mediaPlaceholder {
+    width: 100%;
+    height: 100%;
+    position: relative;
+    overflow: hidden;
+    background: #000;
+}
+
+.media {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    display: block;
+}
+
+/* --- Right Side: Text Content --- */
+.textContent {
+    flex: 1;
+    /* Takes roughly 1/3 of space */
+    position: relative;
+    display: flex;
+    justify-content: flex-end;
+    /* Align content to the right edge */
+    align-items: center;
+    /* Center vertically */
+    padding: 2rem 4rem 2rem 2rem;
+    z-index: 20;
+    /* Gradient overlay from right for better text readability if media goes behind */
+    background: linear-gradient(to right, transparent 0%, rgba(0, 0, 0, 0.8) 40%, #000 100%);
+}
+
+html[dir="ltr"] .textContent {
+    justify-content: flex-start;
+    padding: 2rem 2rem 2rem 4rem;
+    background: linear-gradient(to left, transparent 0%, rgba(0, 0, 0, 0.8) 40%, #000 100%);
+}
+
+.textBlock {
+    position: absolute;
+    /* Stack on top of each other */
+    right: 4rem;
+    /* Fixed position from right */
+    width: 650px;
+    max-width: 90vw;
+    display: flex;
+    flex-direction: column;
+    gap: 1.5rem;
+    text-align: right;
+    direction: rtl;
+    pointer-events: none;
+    /* Let clicks pass through if needed */
+}
+
+html[dir="ltr"] .textBlock {
+    right: auto;
+    left: 4rem;
+    text-align: left;
+    direction: ltr;
+    /* English text should be LTR */
+}
+
+.textBlock>* {
+    pointer-events: none;
+}
+
+.textBlock button {
+    pointer-events: all;
+}
+
+.titleWrapper {
+    margin-bottom: 1rem;
+}
+
+.title {
+    line-height: 1.2;
+}
+
+.description {
+    line-height: 1.1;
+    color: #a0a0a0;
+}
+
+.scrollIconWrapper {
+    margin-top: 3rem;
+    display: flex;
+    justify-content: flex-start;
+    background: none;
+    border: none;
+    padding: 0;
+    cursor: pointer;
+    pointer-events: all;
+}
+
+.scrollIcon {
+    opacity: 0.8;
+    transition: opacity 0.3s;
+}
+
+.scrollIconWrapper:hover .scrollIcon {
+    opacity: 1;
+}
+
+/* --- Bottom: Partners Marquee (Pure CSS) --- */
+.partnersSection {
+    position: absolute;
+    bottom: 0;
+    left: 0;
+    width: 100vw;
+    height: 20vh;
+    z-index: 30;
+    display: flex;
+    align-items: center;
+    overflow: hidden;
+    mask-image: linear-gradient(to right, transparent, black 15%, black 85%, transparent);
+    -webkit-mask-image: linear-gradient(to right, transparent, black 15%, black 85%, transparent);
+    direction: ltr;
+}
+
+.marqueeTrack {
+    display: flex;
+    flex-shrink: 0;
+    align-items: center;
+    gap: 0;
+    width: max-content;
+    will-change: transform;
+    animation: scrollPartners 30s linear infinite;
+}
+
+html[dir="ltr"] .marqueeTrack {
+    animation-direction: reverse;
+}
+
+@keyframes scrollPartners {
+    0% {
+        transform: translateX(0);
+    }
+
+    100% {
+        transform: translateX(-50%);
+    }
+}
+
+.partnerLogoWrapper {
+    flex-shrink: 0;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    opacity: 0.6;
+    transition: opacity 0.3s;
+    padding: 0 2.5rem;
+}
+
+.partnerLogoWrapper:hover {
+    opacity: 1;
+}
+
+.partnerLogo {
+    height: 55px;
+    width: auto;
+    object-fit: contain;
+    filter: brightness(0) invert(1);
+}
+
+/* Helper for absolute positioning wrapper if needed */
+.absoluteTextBlock {}
+
+/* --- Mobile Styles --- */
+.mobileVisionSection {
+    background-color: #000;
+    color: #fff;
+    padding: 6rem 0;
+    display: flex;
+    flex-direction: column;
+    gap: 4rem;
+    overflow: hidden;
+    position: relative;
+    width: 100vw;
+}
+
+.mobileTextBlock {
+    padding: 0 2rem;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    text-align: center;
+    gap: 1.5rem;
+    direction: rtl;
+    position: relative;
+    z-index: 10;
+}
+
+.mobileTitle {
+    line-height: 1.2;
+}
+
+.mobileDescription {
+    line-height: 0.5;
+    max-width: 90vw;
+}
+
+.mobileDescription p {
+    text-align: center !important;
+}
+
+.mobileMediaCarousel {
+    width: 100vw;
+    overflow: hidden;
+    position: relative;
+    background-color: #000;
+    mask-image: linear-gradient(to right, transparent, black 10%, black 90%, transparent);
+    -webkit-mask-image: linear-gradient(to right, transparent, black 10%, black 90%, transparent);
+    direction: ltr;
+}
+
+.mobileMediaTrack {
+    display: flex;
+    gap: 1rem;
+    padding: 0 1rem 0 0;
+    /* Align perfectly for half-scroll: right padding replaces the missing gap at the end */
+    width: max-content;
+    will-change: transform;
+    animation: scrollMediaHorizontal 15s linear infinite;
+}
+
+.mobileMediaItem {
+    width: 250px;
+    height: 250px;
+    overflow: hidden;
+    flex-shrink: 0;
+}
+
+.mobilePartnersSection {
+    width: 100vw;
+    overflow: hidden;
+    position: relative;
+    margin-top: 1rem;
+    mask-image: linear-gradient(to right, transparent, black 15%, black 85%, transparent);
+    -webkit-mask-image: linear-gradient(to right, transparent, black 15%, black 85%, transparent);
+    z-index: 10;
+    direction: ltr;
+}
+
+html[dir="ltr"] .mobileDescription {
+    line-height: 1.1;
+}
+
+
+
+/* Reuses .marqueeTrack from desktop but mobile adjusts partner sizes optionally, handled in tsx widths */

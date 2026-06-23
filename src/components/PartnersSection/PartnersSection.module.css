@@ -1,0 +1,266 @@
+.section {
+  padding: 8rem 0;
+  background-color: #000;
+  position: relative;
+  overflow: hidden;
+}
+
+.header {
+  margin-bottom: 6rem;
+  max-width: 1000px;
+  margin-left: auto;
+  margin-right: auto;
+  text-align: center;
+}
+
+.title {
+  margin-bottom: 2rem;
+  color: #ffffff;
+}
+
+.description {
+  color: #888888;
+  line-height: 1.6;
+  max-width: 600px;
+  margin: 0 auto;
+}
+
+.partnersGrid {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+  gap: 2rem;
+  align-items: center;
+  padding: 0 15rem;
+}
+
+.partnerCard {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  height: 100px;
+  transition: all 0.4s ease;
+}
+
+.logoWrapper {
+  width: 100%;
+  height: 100%;
+  position: relative;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.logo {
+  max-width: 100%;
+  max-height: 100%;
+  object-fit: contain;
+  filter: brightness(0) invert(1);
+  opacity: 0.7;
+  transition: all 0.4s ease;
+}
+
+.partnerCard:hover .logo {
+  opacity: 1;
+  transform: scale(1.05);
+}
+
+@media (max-width: 1200px) {
+  .partnersGrid {
+    gap: 4rem;
+    padding: 0 4rem;
+  }
+}
+
+@media (max-width: 1024px) {
+  .partnersGrid {
+    padding: 0 2rem;
+  }
+}
+
+@media (max-width: 768px) {
+  .section {
+    padding: 5rem 0;
+  }
+
+  .header {
+    margin-bottom: 2rem;
+  }
+
+  .partnersGrid {
+    gap: 3rem;
+  }
+
+  .partnerCard {
+    height: 80px;
+  }
+}
+
+@media (max-width: 480px) {
+  .partnersGrid {
+    gap: 0rem;
+  }
+
+  .logo {
+    max-width: 18vw;
+    max-height: 18vw;
+  }
+
+  .logoWrapper {
+    height: 20vw;
+    width: 20vw;
+  }
+
+  .description {
+    max-width: 80%;
+    margin: 0 auto;
+  }
+
+  .title {
+    margin-bottom: 0;
+  }
+}
+
+/* ── Download Profile Button (exact copy from PortfolioSection) ── */
+.downloadWrapper {
+  display: flex;
+  justify-content: center;
+  margin-top: 4rem;
+}
+
+.downloadButton {
+  background-color: transparent;
+  border: none;
+  cursor: pointer;
+  padding: 0;
+  margin-top: 2rem;
+  width: 100%;
+  max-width: 350px;
+  display: block;
+  position: relative;
+  align-self: flex-end;
+  margin-left: 50px;
+}
+
+.buttonWrapper {
+  position: relative;
+  display: flex;
+  align-items: center;
+  width: 100%;
+}
+
+.buttonContent {
+  position: relative;
+  display: flex;
+  width: 100%;
+  height: 60px;
+  align-items: center;
+  justify-content: center;
+  background-color: #333333;
+  border-radius: 9999px;
+  overflow: hidden;
+  transition: transform 0.6s cubic-bezier(0.4, 0, 0.2, 1), background-color 0.5s ease;
+}
+
+.downloadButton:hover .buttonContent {
+  transform: translateX(-60px);
+  background-color: #fff;
+}
+
+.buttonBgFill {
+  position: absolute;
+  top: 100%;
+  left: -100%;
+  width: 210%;
+  height: 650%;
+  background-color: #8c52ff;
+  border-radius: 50%;
+  transition: transform 0.9s cubic-bezier(0.4, 0, 0.2, 1);
+  transform: translateY(0);
+  z-index: 1;
+}
+
+.downloadButton:hover .buttonBgFill {
+  transform: translateY(-60%);
+}
+
+.buttonText {
+  position: relative;
+  z-index: 2;
+}
+
+.arrowCircle {
+  position: absolute;
+  left: -60px;
+  width: 60px;
+  height: 60px;
+  background-color: #333333;
+  border-radius: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  color: #ffffff;
+  transition: left 0.6s cubic-bezier(0.4, 0, 0.2, 1), background-color 0.6s ease;
+  z-index: 3;
+}
+
+.downloadButton:hover .arrowCircle {
+  left: calc(100% - 60px);
+  background-color: #8c52ff;
+}
+
+.arrowIcon {
+  width: 20px;
+  height: 20px;
+  transition: transform 0.6s cubic-bezier(0.4, 0, 0.2, 1), filter 0.3s ease;
+}
+
+.downloadButton:hover .arrowIcon {
+  transform: rotate(-90deg);
+  filter: brightness(1.5);
+}
+
+/* ── LTR overrides ── */
+html[dir="ltr"] .downloadButton {
+  margin-left: 0;
+  margin-right: 50px;
+}
+
+html[dir="ltr"] .downloadButton:hover .buttonContent {
+  transform: translateX(60px);
+}
+
+html[dir="ltr"] .arrowCircle {
+  left: auto;
+  right: -60px;
+  transition: right 0.6s cubic-bezier(0.4, 0, 0.2, 1), background-color 0.6s ease;
+}
+
+html[dir="ltr"] .downloadButton:hover .arrowCircle {
+  left: auto;
+  right: calc(100% - 60px);
+}
+
+html[dir="ltr"] .buttonBgFill {
+  left: auto;
+  right: -100%;
+}
+
+html[dir="ltr"] .arrowCircle .arrowIcon {
+  transform: scaleX(-1);
+}
+
+html[dir="ltr"] .downloadButton:hover .arrowCircle .arrowIcon {
+  transform: scaleX(-1) rotate(-90deg);
+}
+
+@media (max-width: 480px) {
+  .downloadButton {
+    align-self: center;
+    margin-left: 20px;
+  }
+
+  .buttonWrapper {
+    width: 90%;
+  }
+}

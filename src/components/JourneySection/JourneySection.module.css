@@ -1,0 +1,348 @@
+.journeySection {
+  position: relative;
+  width: 100%;
+  background-color: var(--background);
+  min-height: 270vh;
+  /* Increased base height for smoother scrolling */
+}
+
+.stickyWrapper {
+  position: sticky;
+  top: 0;
+  width: 100%;
+  height: 100vh;
+  /* overflow: hidden; Removed so children can extend beyond the section */
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  padding: 4rem 6rem;
+}
+
+.bgTexture {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background-color: transparent;
+  background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 200 200' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='noiseFilter'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.8' numOctaves='3' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23noiseFilter)' opacity='0.4'/%3E%3C/svg%3E");
+  opacity: 0.3;
+  pointer-events: none;
+  z-index: 1;
+}
+
+.bgGrid {
+  position: absolute;
+  top: 0;
+  bottom: 50px;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background-image: url('/journey-grid.png');
+  background-size: cover;
+  background-position: center;
+  background-repeat: no-repeat;
+  pointer-events: none;
+  z-index: 2;
+  opacity: 1;
+}
+
+.header {
+  position: relative;
+  z-index: 10;
+  display: flex;
+  align-items: center;
+}
+
+html[dir="ltr"] .header {
+  direction: ltr;
+}
+
+.headerTitle {
+  position: relative;
+  padding-bottom: 0.5rem;
+}
+
+.headerUnderline {
+  position: absolute;
+  bottom: 0;
+  right: 0;
+  /* Align right for Arabic text flow naturally */
+  width: 4rem;
+  height: 4px;
+  background-color: black;
+}
+
+.mainContent {
+  position: relative;
+  z-index: 10;
+  flex: 1;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  width: 100%;
+  padding: 0 4rem;
+  /* Direction: rtl assumed or explicitly set */
+  direction: rtl;
+}
+
+html[dir="ltr"] .mainContent {
+  flex-direction: row;
+  direction: ltr;
+}
+
+.leftSide {
+  flex: 1;
+  display: flex;
+  justify-content: flex-end;
+  /* Align icon towards center/left visually */
+  align-items: center;
+  gap: 5rem;
+}
+
+.rightSide {
+  flex: 1;
+  position: relative;
+  height: 300px;
+  /* overflow: hidden; Removed to ensure no clipping, let Framer handle it */
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+}
+
+.textWrapper {
+  position: absolute;
+  right: 0;
+  width: 100%;
+  text-align: right;
+  /* Ensure text aligns right for Arabic */
+  display: flex;
+  flex-direction: column;
+  gap: 0.5rem;
+  transform: translateY(-50%);
+}
+
+html[dir="ltr"] .textWrapper {
+  right: auto;
+  left: 0;
+  text-align: left;
+}
+
+.titleWrapper {
+  display: flex;
+  align-items: baseline;
+  justify-content: flex-start;
+  gap: 0.5rem;
+}
+
+.inlineRichText {
+  display: inline;
+}
+
+.inlineRichText p {
+  display: inline !important;
+  margin: 0 !important;
+  font-family: inherit;
+  font-size: inherit;
+  font-weight: inherit;
+}
+
+html[dir="ltr"] .titleWrapper {
+  justify-content: flex-start;
+}
+
+.description {
+  max-width: 28rem;
+  line-height: 1.8;
+  /* margin-top: 1rem; */
+}
+
+.footer {
+  z-index: 10;
+  direction: rtl;
+  justify-content: center;
+  width: 100%;
+  padding-top: 2rem;
+  padding-bottom: 4rem;
+  display: flex;
+  position: relative;
+  gap: 150px;
+  align-items: flex-end;
+}
+
+.introBlock {
+  position: relative;
+  z-index: 10;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 1rem;
+  width: min(100%, 46rem);
+  margin: 0 auto;
+  text-align: center;
+  padding: 0 1rem 2rem 0;
+}
+
+html[dir="ltr"] .footer {
+  direction: ltr;
+}
+
+.statItem {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  transition: transform 0.3s ease;
+}
+
+/* Individual positioning to create the curved effect */
+.statItem:nth-child(1) {
+  transform: translateY(10px) rotate(4deg);
+}
+
+html[dir="ltr"] .statItem:nth-child(1) {
+  transform: translateY(10px) rotate(-4deg);
+}
+
+.statItem:nth-child(2) {
+  transform: translateY(-15px);
+}
+
+.statItem:nth-child(3) {
+  transform: translateY(10px) rotate(-4deg);
+}
+
+html[dir="ltr"] .statItem:nth-child(3) {
+  transform: translateY(10px) rotate(4deg);
+}
+
+.iconCircle {
+  width: 140px;
+  height: 140px;
+  border-radius: 50%;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  position: relative;
+  /* background-color: rgba(255, 255, 255, 0.4); */
+  /* backdrop-filter: blur(8px); */
+  border: 1px solid #969393;
+}
+
+.iconSvg {
+  width: 70px;
+  height: 70px;
+  fill: black;
+}
+
+/* --- Mobile Styles --- */
+.mobileJourneySection {
+  position: relative;
+  width: 100%;
+  background-color: var(--background);
+  direction: rtl;
+  height: 100vw;
+}
+
+.mobileStickyWrapper {
+  position: sticky;
+  top: 0;
+  width: 100%;
+  height: 100vh;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  padding: 5rem 1.5rem;
+}
+
+.mobileTopRow {
+  display: flex;
+  align-items: center;
+  gap: 1rem;
+  z-index: 10;
+  width: 100%;
+}
+
+.mobileIconCircle {
+  width: 65px;
+  height: 65px;
+  border-radius: 50%;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  border: 1px solid #969393;
+  flex-shrink: 0;
+}
+
+.mobileIconSvg {
+  width: 32px;
+  height: 32px;
+  fill: black;
+}
+
+.mobileHeaderTitle {
+  position: relative;
+}
+
+.mobileAnimatedArea {
+  position: relative;
+  flex: 1;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 100%;
+  z-index: 5;
+}
+
+.mobileTextWrapper {
+  position: absolute;
+  width: 100%;
+  text-align: right;
+  display: flex;
+  flex-direction: column;
+  gap: 0.5rem;
+}
+
+html[dir="ltr"] .mobileTextWrapper {
+  text-align: left;
+}
+
+.mobileTitleWrapper {
+  display: flex;
+  align-items: baseline;
+  justify-content: flex-start;
+  gap: 0.5rem;
+}
+
+.mobileDescription {
+  margin-top: 0.25rem;
+  max-width: 90%;
+}
+
+.mobileIntroBlock {
+  position: relative;
+  z-index: 10;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 0.5rem;
+  width: 100%;
+  text-align: center;
+  margin-bottom: 0.5rem;
+}
+
+.mobileStats {
+  display: flex;
+  justify-content: space-between;
+  width: 100%;
+  align-items: center;
+  margin-top: 1rem;
+  direction: rtl;
+  padding: 0 0.5rem;
+}
+
+.mobileStatItem {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  transition: transform 0.3s ease;
+}

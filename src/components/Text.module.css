@@ -1,0 +1,79 @@
+.text {
+  margin: 0;
+  padding: 0;
+  line-height: 1.5;
+}
+
+/* Fonts */
+.font-ibm-plex {
+  font-family: var(--font-ibm-plex), sans-serif;
+}
+
+.font-cairo {
+  font-family: var(--font-cairo), sans-serif;
+}
+
+.font-zarid {
+  font-family: var(--font-zarid), sans-serif;
+}
+
+/* Sizes */
+.size-xs { font-size: 0.75rem; }
+.size-sm { font-size: 0.875rem; }
+.size-md { font-size: 1rem; }
+.size-lg { font-size: 1.125rem; }
+.size-xl { font-size: 1.25rem; }
+.size-2xl { font-size: 1.5rem; }
+.size-3xl { font-size: 1.875rem; }
+.size-4xl { font-size: 2.25rem; }
+.size-5xl { font-size: 3rem; }
+.size-6xl { font-size: 3.75rem; }
+.size-7xl { font-size: 4.5rem; }
+.size-8xl { font-size: 6rem; line-height: 1.2; }
+
+/* Weights */
+.weight-100 { font-weight: 100; }
+.weight-200 { font-weight: 200; }
+.weight-300, .weight-light { font-weight: 300; }
+.weight-400, .weight-normal { font-weight: 400; }
+.weight-500, .weight-medium { font-weight: 500; }
+.weight-600, .weight-semibold { font-weight: 600; }
+.weight-700, .weight-bold { font-weight: 700; }
+.weight-800, .weight-extrabold { font-weight: 800; }
+.weight-900 { font-weight: 900; }
+
+/* Alignment */
+.align-left { text-align: left; }
+.align-center { text-align: center; }
+.align-right { text-align: right; }
+.align-justify { text-align: justify; }
+
+/* Force alignment on rich text when parent has explicit align class */
+.align-left .richText p { text-align: left !important; }
+.align-center .richText p { text-align: center !important; }
+.align-right .richText p { text-align: right !important; }
+.align-justify .richText p { text-align: justify !important; }
+
+/* Rich Text */
+.richText {
+  width: 100%;
+}
+
+.richText p {
+  text-align: inherit;
+  margin-bottom: 1.25rem;
+}
+
+.richText p:last-child {
+  margin-bottom: 0;
+}
+
+.richText a {
+  color: inherit;
+  text-decoration: underline;
+}
+
+.richText ul, .richText ol {
+  margin-bottom: 1.25rem;
+  padding-inline-start: 1.5rem;
+}

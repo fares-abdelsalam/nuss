@@ -1,0 +1,223 @@
+{
+  "navbar": {
+    "home": "Home",
+    "services": "Services",
+    "portfolio": "Portfolio",
+    "team": "Our Identity",
+    "langSwitcher": "AR"
+  },
+  "hero": {
+    "titleLine1": "We create the impact",
+    "titleLine2": "that distinguishes you",
+    "description": "Our added value at NUSS lies in the fact that we don't just provide services. We work at the intersection of knowledge and innovation to give your great ideas the smart execution they deserve. We believe true value begins with a deep understanding of your challenges, turning vision into tangible results that put you ahead."
+  },
+  "visionSection": {
+    "visionTitle": "Our Vision",
+    "visionDesc": "To be an enabler in the digital transformation journey by building institutional communication that reflects the Kingdom's ambition, keeps pace with its development, and contributes to achieving a sustainable impact beyond temporary campaigns.",
+    "missionTitle": "Our Mission",
+    "missionDesc": "Empowering our partners to reach their audience effectively through innovative creative solutions and integrated communication strategies.",
+    "scrollUp": "Scroll up",
+    "scrollDown": "Scroll down"
+  },
+  "journeySection": {
+    "sectionTitle": "Our Journey",
+    "title2014": "The Beginning",
+    "desc2014": "In an era of evolving technology, we sought to deliver fresh ideas that enhance user experience and contribute to digital transformation within organizations.",
+    "title2018": "Expansion",
+    "desc2018": "We began expanding our services to include innovative solutions for both the public and private sectors, focusing on quality and excellence.",
+    "title2023": "Leadership",
+    "desc2023": "We aspire to be the preferred partner in the digital transformation journey by delivering smart and sustainable solutions.",
+    "plusSuffix": "+ ",
+    "plusSuffixDesktop": "+",
+    "percentPrefix": "%",
+    "projects": "Completed Projects",
+    "localization": "Localization Rate",
+    "clients": "Clients"
+  },
+  "servicesSection": {
+    "mainTitle": {
+      "line1": "We offer a",
+      "line2": "comprehensive",
+      "line3": "set of"
+    },
+    "description": {
+      "line1": ",Solutions serving various stages of growth",
+      "line2": ".from initial concept to execution and development"
+    },
+    "descriptionMobile": "solutions serving various stages of growth, from initial concept to execution and development.",
+    "service": {
+      "1": {
+        "title": "Events &\nSeasons Management",
+        "point1": {
+          "title": "Output 1",
+          "description": "We transform social media platforms from mere digital presence into a real channel of influence. We build a cohesive presence that reflects the brand identity and creates continuous communication with the audience."
+        },
+        "point2": {
+          "title": "Output 2",
+          "description": "We transform social media platforms from mere digital presence into a real channel of influence. We build a cohesive presence that reflects the brand identity and creates continuous communication with the audience."
+        }
+      },
+      "2": {
+        "title": "Written &\nIntroductory Content",
+        "point1": {
+          "title": "Output 1",
+          "description": "We transform social media platforms from mere digital presence into a real channel of influence. We build a cohesive presence that reflects the brand identity and creates continuous communication with the audience."
+        },
+        "point2": {
+          "title": "Output 2",
+          "description": "We transform social media platforms from mere digital presence into a real channel of influence. We build a cohesive presence that reflects the brand identity and creates continuous communication with the audience."
+        }
+      },
+      "3": {
+        "title": "Design &\nProduction",
+        "point1": {
+          "title": "Output 1",
+          "description": "We transform social media platforms from mere digital presence into a real channel of influence. We build a cohesive presence that reflects the brand identity and creates continuous communication with the audience."
+        },
+        "point2": {
+          "title": "Output 2",
+          "description": "We transform social media platforms from mere digital presence into a real channel of influence. We build a cohesive presence that reflects the brand identity and creates continuous communication with the audience."
+        }
+      },
+      "4": {
+        "title": "Digital\nMarketing",
+        "point1": {
+          "title": "Output 1",
+          "description": "We transform social media platforms from mere digital presence into a real channel of influence. We build a cohesive presence that reflects the brand identity and creates continuous communication with the audience."
+        },
+        "point2": {
+          "title": "Output 2",
+          "description": "We transform social media platforms from mere digital presence into a real channel of influence. We build a cohesive presence that reflects the brand identity and creates continuous communication with the audience."
+        }
+      },
+      "5": {
+        "title": "Reputation\nManagement",
+        "point1": {
+          "title": "Output 1",
+          "description": "We transform social media platforms from mere digital presence into a real channel of influence. We build a cohesive presence that reflects the brand identity and creates continuous communication with the audience."
+        },
+        "point2": {
+          "title": "Output 2",
+          "description": "We transform social media platforms from mere digital presence into a real channel of influence. We build a cohesive presence that reflects the brand identity and creates continuous communication with the audience."
+        }
+      },
+      "6": {
+        "title": "Media\nConsulting",
+        "point1": {
+          "title": "Output 1",
+          "description": "We transform social media platforms from mere digital presence into a real channel of influence. We build a cohesive presence that reflects the brand identity and creates continuous communication with the audience."
+        },
+        "point2": {
+          "title": "Output 2",
+          "description": "We transform social media platforms from mere digital presence into a real channel of influence. We build a cohesive presence that reflects the brand identity and creates continuous communication with the audience."
+        }
+      }
+    }
+  },
+  "portfolioSection": {
+    "mainTitleLine1": "Our",
+    "mainTitleLine2": "Portfolio",
+    "description": "We realize that effective communication goes beyond content; it is a strategic tool that promotes development, brings entities closer to their audience, and turns visions into clear, impactful messages.",
+    "downloadProfile": "Company Profile",
+    "tabs": {
+      "gov": "Gov Sector",
+      "private": "Private Sector",
+      "nonProfit": "Non-Profit Sector",
+      "nuss": "Nuss Initiatives"
+    },
+    "works": {
+      "gov": {
+        "titlePart1": "Our Work",
+        "titlePart2": "in Gov Sector",
+        "client1": "Ministry of Culture",
+        "client2": "Ministry of Culture 2"
+      },
+      "private": {
+        "titlePart1": "Our Work",
+        "titlePart2": "in Private Sector",
+        "client1": "Private Company",
+        "client2": "Private Company 2"
+      },
+      "nonProfit": {
+        "titlePart1": "Our Work",
+        "titlePart2": "in Non-Profit Sector",
+        "client1": "Non-Profit Org",
+        "client2": "Non-Profit Org 2"
+      },
+      "nuss": {
+        "titlePart1": "Nuss",
+        "titlePart2": "Initiatives",
+        "client1": "Nuss",
+        "client2": "Nuss 2"
+      }
+    },
+    "navNext": "Next",
+    "navPrev": "Prev"
+  },
+  "methodologySection": {
+    "description": [
+      "We begin every partnership with a deep understanding of the entity's nature, goals, and the challenges it faces.",
+      "We work closely with decision-makers and teams to develop communication pathways",
+      "that serve the general vision of the organization and support its short- and long-term plans."
+    ],
+    "descriptionMobile": "We begin every partnership with a deep understanding of the entity's nature, goals, and the challenges it faces. We work closely with decision-makers and teams to develop communication pathways that serve the general vision of the organization and support its short- and long-term plans.",
+    "cards": {
+      "discovery": {
+        "title": "Discovery",
+        "desc": "We uncover the true essence of your brand, diving deep into your core values."
+      },
+      "strategy": {
+        "title": "Strategy",
+        "desc": "Crafting a comprehensive roadmap designed for sustainable and scalable growth."
+      },
+      "execution": {
+        "title": "Execution",
+        "desc": "Bringing the vision to life with precision, exceptional design, and robust engineering."
+      },
+      "analysis": {
+        "title": "Analysis",
+        "desc": "Measuring success through data-driven insights and continuously refining our approach."
+      },
+      "innovation": {
+        "title": "Innovation",
+        "desc": "Exploring new frontiers and leveraging cutting-edge technologies to stay ahead."
+      },
+      "delivery": {
+        "title": "Delivery",
+        "desc": "Ensuring seamless deployment and providing unwavering support for your digital products."
+      }
+    }
+  },
+  "teamSection": {
+    "titleLine1": "Our",
+    "titleLine2": "Team",
+    "subtitle": "The pillars of Nuss success and the makers of its glory."
+  },
+  "businessModelsSection": {
+    "title": "Business",
+    "models": [
+      "Events & Seasons",
+      "Visual Identities",
+      "Creative Projects",
+      "Websites",
+      "Studio Works",
+      "Annual Reports",
+      "Social Media Platforms",
+      "Written & Introductory Content"
+    ]
+  },
+  "footerSection": {
+    "socialLinkedin": "LinkedIn",
+    "socialLinkedinUrl": "https://linkedin.com",
+    "socialInstagram": "Instagram",
+    "socialInstagramUrl": "https://instagram.com",
+    "socialX": "X (Twitter)",
+    "socialXUrl": "https://x.com",
+    "footer": "At NUSS, we believe communication,",
+    "mapAlt": "NUSS location map"
+  },
+  "partnersSection": {
+    "title": "Our Partners",
+    "description": "We are proud to work with an elite group of partners across various sectors, striving together for excellence and creating impact."
+  }
+}

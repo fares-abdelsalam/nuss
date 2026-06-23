@@ -1,0 +1,170 @@
+/* IBM Plex Sans Arabic - Thin */
+@font-face {
+  font-family: 'IBM Plex Sans Arabic';
+  src: url('/fonts/IBMPlexSansArabic-Thin.ttf') format('truetype');
+  font-weight: 100;
+  font-style: normal;
+  font-display: swap;
+}
+
+/* IBM Plex Sans Arabic - ExtraLight */
+@font-face {
+  font-family: 'IBM Plex Sans Arabic';
+  src: url('/fonts/IBMPlexSansArabic-ExtraLight.ttf') format('truetype');
+  font-weight: 200;
+  font-style: normal;
+  font-display: swap;
+}
+
+/* IBM Plex Sans Arabic - Light */
+@font-face {
+  font-family: 'IBM Plex Sans Arabic';
+  src: url('/fonts/IBMPlexSansArabic-Light.ttf') format('truetype');
+  font-weight: 300;
+  font-style: normal;
+  font-display: swap;
+}
+
+/* IBM Plex Sans Arabic - Regular */
+@font-face {
+  font-family: 'IBM Plex Sans Arabic';
+  src: url('/fonts/IBMPlexSansArabic-Regular.ttf') format('truetype');
+  font-weight: 400;
+  font-style: normal;
+  font-display: swap;
+}
+
+/* IBM Plex Sans Arabic - Medium */
+@font-face {
+  font-family: 'IBM Plex Sans Arabic';
+  src: url('/fonts/IBMPlexSansArabic-Medium.ttf') format('truetype');
+  font-weight: 500;
+  font-style: normal;
+  font-display: swap;
+}
+
+/* IBM Plex Sans Arabic - SemiBold */
+@font-face {
+  font-family: 'IBM Plex Sans Arabic';
+  src: url('/fonts/IBMPlexSansArabic-SemiBold.ttf') format('truetype');
+  font-weight: 600;
+  font-style: normal;
+  font-display: swap;
+}
+
+/* IBM Plex Sans Arabic - Bold */
+@font-face {
+  font-family: 'IBM Plex Sans Arabic';
+  src: url('/fonts/IBMPlexSansArabic-Bold.ttf') format('truetype');
+  font-weight: 700;
+  font-style: normal;
+  font-display: swap;
+}
+
+/* 29LT Zarid Sans AL - Thin */
+@font-face {
+  font-family: '29LT Zarid Sans AL';
+  src: url('/fonts/29LTZaridSansAL-Thin.otf') format('opentype');
+  font-weight: 100;
+  font-style: normal;
+  font-display: swap;
+}
+
+/* 29LT Zarid Sans AL - ExtraLight */
+@font-face {
+  font-family: '29LT Zarid Sans AL';
+  src: url('/fonts/29LTZaridSansAL-ExtraLight.otf') format('opentype');
+  font-weight: 200;
+  font-style: normal;
+  font-display: swap;
+}
+
+/* 29LT Zarid Sans AL - Light */
+@font-face {
+  font-family: '29LT Zarid Sans AL';
+  src: url('/fonts/29LTZaridSansAL-Light.otf') format('opentype');
+  font-weight: 300;
+  font-style: normal;
+  font-display: swap;
+}
+
+/* 29LT Zarid Sans AL - Regular */
+@font-face {
+  font-family: '29LT Zarid Sans AL';
+  src: url('/fonts/29LTZaridSansAL-Regular.otf') format('opentype');
+  font-weight: 400;
+  font-style: normal;
+  font-display: swap;
+}
+
+/* 29LT Zarid Sans AL - Medium */
+@font-face {
+  font-family: '29LT Zarid Sans AL';
+  src: url('/fonts/29LTZaridSansAL-Medium.otf') format('opentype');
+  font-weight: 500;
+  font-style: normal;
+  font-display: swap;
+}
+
+/* 29LT Zarid Sans AL - SemiBold */
+@font-face {
+  font-family: '29LT Zarid Sans AL';
+  src: url('/fonts/29LTZaridSansAL-SemiBold.otf') format('opentype');
+  font-weight: 600;
+  font-style: normal;
+  font-display: swap;
+}
+
+/* 29LT Zarid Sans AL - Bold */
+@font-face {
+  font-family: '29LT Zarid Sans AL';
+  src: url('/fonts/29LTZaridSansAL-Bold.otf') format('opentype');
+  font-weight: 700;
+  font-style: normal;
+  font-display: swap;
+}
+
+/* 29LT Zarid Sans AL - Black */
+@font-face {
+  font-family: '29LT Zarid Sans AL';
+  src: url('/fonts/29LTZaridSansAL-Black.otf') format('opentype');
+  font-weight: 900;
+  font-style: normal;
+  font-display: swap;
+}
+
+:root {
+  --background: #FBF5F3;
+  --foreground: #666666;
+  --font-ibm-plex: 'IBM Plex Sans Arabic', sans-serif;
+  --font-zarid: '29LT Zarid Sans AL', sans-serif;
+}
+
+* {
+  box-sizing: border-box;
+  padding: 0;
+  margin: 0;
+}
+
+html,
+body {
+  max-width: 100vw;
+  overflow-x: clip;
+  background-color: var(--background);
+  color: var(--foreground);
+  scroll-behavior: smooth;
+}
+
+section {
+  scroll-margin-top: 80px;
+}
+
+footer {
+  scroll-margin-top: 80px;
+}
+
+
+a {
+  color: inherit;
+  text-decoration: none;
+}
