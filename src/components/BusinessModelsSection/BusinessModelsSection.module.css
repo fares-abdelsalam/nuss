@@ -37,7 +37,7 @@
 
 .card {
   position: relative;
-  aspect-ratio: 3 / 3.42;
+  aspect-ratio: 3 / 3.4;
   background-color: #d1d1d1;
   overflow: hidden;
   display: flex;

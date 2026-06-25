@@ -76,6 +76,14 @@ export const BusinessModels: CollectionConfig = {
       required: false,
     },
     {
+      name: 'url',
+      type: 'text',
+      required: false,
+      admin: {
+        description: 'Optional link for this business model card.',
+      },
+    },
+    {
       name: 'media',
       type: 'upload',
       relationTo: 'media',

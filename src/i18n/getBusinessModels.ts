@@ -10,12 +10,14 @@ export type BusinessModelItem = {
   title: string;
   mediaType: 'video' | 'image';
   mediaUrl: string;
+  url: string;
 };
 
 type PayloadBusinessModel = {
   id: string;
   key?: string | null;
   title?: unknown;
+  url?: string | null;
   media?: {
     url?: string | null;
     mimeType?: string | null;
@@ -34,6 +36,7 @@ export const getBusinessModels = cache(async (locale: Locale): Promise<BusinessM
       select: {
         key: true,
         title: true,
+        url: true,
         media: true,
       },
       depth: 1,
@@ -49,6 +52,7 @@ export const getBusinessModels = cache(async (locale: Locale): Promise<BusinessM
       mediaUrl: typeof doc.media === 'object' && doc.media !== null && typeof doc.media.url === 'string'
         ? doc.media.url
         : '',
+      url: typeof doc.url === 'string' ? doc.url : '',
     }));
   } catch (error) {
     console.error('Error fetching business models:', error);

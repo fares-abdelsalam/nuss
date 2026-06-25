@@ -14,6 +14,7 @@ type BusinessModelItem = {
   title: string;
   mediaType: 'video' | 'image';
   mediaUrl: string;
+  url: string;
 };
 
 export const BusinessModelsSection = ({ businessModels }: { businessModels: BusinessModelItem[] }) => {
@@ -121,6 +122,13 @@ export const BusinessModelsSection = ({ businessModels }: { businessModels: Busi
               y: { duration: 0.5, delay: index * 0.1 },
               scale: { duration: 0.3, ease: "easeOut" }
             }}
+            onClick={() => {
+              if (model.url) {
+                const url = model.url.match(/^https?:\/\//) ? model.url : `https://${model.url}`;
+                window.open(url, '_blank', 'noopener,noreferrer');
+              }
+            }}
+            style={{ cursor: model.url ? 'pointer' : undefined }}
           >
             {model.mediaUrl ? (
               model.mediaType === 'video' ? (
