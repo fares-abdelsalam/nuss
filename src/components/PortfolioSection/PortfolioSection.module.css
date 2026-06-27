@@ -100,6 +100,8 @@
   width: 100%;
   aspect-ratio: 16 / 9;
   position: relative;
+  max-width: 720px;
+  margin: 0 auto;
 }
 
 .imageWrapper {
@@ -214,6 +216,69 @@ html[dir="ltr"] .navigation {
 .mobileContentArea {
   display: none;
   width: 100%;
+}
+
+/* ── Tablet / small laptop ── */
+@media (min-width: 481px) and (max-width: 1024px) {
+  .container {
+    padding: 4rem 3rem;
+    gap: 3rem;
+  }
+
+  .header {
+    flex-direction: column;
+    gap: 1.5rem;
+  }
+
+  .rightContent {
+    align-items: center;
+    width: 100%;
+  }
+
+  .leftContent {
+    padding-top: 2rem;
+    max-width: 100%;
+  }
+
+  .contentArea {
+    grid-template-columns: 1fr;
+    gap: 2rem;
+    margin-top: 2rem;
+    min-height: auto;
+  }
+
+  .navButton {
+    width: 72px;
+    height: 72px;
+  }
+
+  .navIcon {
+    width: 24px;
+  }
+
+  .mediaContainer {
+    max-width: 600px;
+  }
+}
+
+/* ── Large screens (1400px+) ── */
+@media (min-width: 1400px) {
+  .container {
+    padding: 6rem 12rem;
+  }
+
+  .mediaContainer {
+    max-width: 800px;
+  }
+
+  .navButton {
+    width: 110px;
+    height: 110px;
+  }
+
+  .navIcon {
+    width: 36px;
+  }
 }
 
 @media (max-width: 480px) {
