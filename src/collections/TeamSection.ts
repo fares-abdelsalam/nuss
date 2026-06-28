@@ -1,6 +1,5 @@
 import type { CollectionConfig } from 'payload';
 import { normalizeRichTextValue } from '../i18n/richText';
-import { managerImageOptions, memberImageOptions } from '../content/teamImages';
 
 export const TeamSection: CollectionConfig = {
   slug: 'team-section',
@@ -103,14 +102,10 @@ export const TeamSection: CollectionConfig = {
             },
             {
               name: 'baseImage',
-              type: 'select',
+              type: 'text',
               required: false,
-              options: managerImageOptions.map((option) => ({
-                label: option.label,
-                value: option.value,
-              })),
               admin: {
-                description: 'Or choose a manager photo from the project files.',
+                description: 'Path to a manager photo from the project files (e.g. /team-manager-1.webp).',
                 width: '50%',
               },
             },
@@ -188,14 +183,10 @@ export const TeamSection: CollectionConfig = {
             },
             {
               name: 'baseImage',
-              type: 'select',
+              type: 'text',
               required: false,
-              options: memberImageOptions.map((option) => ({
-                label: option.label,
-                value: option.value,
-              })),
               admin: {
-                description: 'Or choose a member photo from the project files.',
+                description: 'Path to a member photo from the project files (e.g. /team/members/A.Harkan.webp).',
                 width: '50%',
               },
             },

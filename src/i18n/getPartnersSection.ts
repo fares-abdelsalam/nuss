@@ -29,7 +29,7 @@ type PayloadPartnersDoc = {
   id: string;
   title?: unknown;
   description?: unknown;
-  profileFile?: { url?: string | null } | string | number | null;
+  profileFile?: string | null;
   partners?: PayloadPartner[] | null;
 };
 
@@ -42,13 +42,6 @@ const buildDefaultPartners = (): Partner[] =>
     name: opt.label,
     logo: opt.value,
   }));
-
-function resolveMediaUrl(media: any): string {
-  if (typeof media === 'object' && media !== null && typeof media.url === 'string') {
-    return media.url;
-  }
-  return '';
-}
 
 export const getPartnersSection = cache(async (locale: Locale): Promise<PartnersSectionData> => {
   try {
@@ -71,7 +64,9 @@ export const getPartnersSection = cache(async (locale: Locale): Promise<Partners
       return { partners: buildDefaultPartners(), profileFileUrl: null };
     }
 
-    const profileFileUrl = resolveMediaUrl(doc.profileFile) || null;
+    const profileFileUrl = typeof doc.profileFile === 'string' && doc.profileFile.length > 0
+      ? doc.profileFile
+      : null;
 
     const partners: Partner[] = (doc.partners || []).map((p) => {
       let logoUrl = '';

@@ -69,12 +69,11 @@ export const PartnersSection: CollectionConfig = {
     },
     {
       name: 'profileFile',
-      type: 'upload',
-      relationTo: 'media',
+      type: 'text',
       required: false,
       admin: {
         description:
-          'Upload the company profile PDF. When set, the "Download Profile" button will download this file.',
+          'Enter a URL to the company profile / brochure (e.g. a PDF hosted on your site or a Google Drive link).',
       },
     },
     {

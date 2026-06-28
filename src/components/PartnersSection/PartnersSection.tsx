@@ -16,8 +16,7 @@ interface PartnersSectionProps {
 }
 
 export const PartnersSection = ({ payloadData, profileFileUrl }: PartnersSectionProps) => {
-  const { locale, getValue, t } = useTranslation();
-  const isLTR = locale === 'en';
+  const { getValue, t } = useTranslation();
   const isMobile = useIsMobile();
 
   const cmsTitle = payloadData?.title;
@@ -26,18 +25,6 @@ export const PartnersSection = ({ payloadData, profileFileUrl }: PartnersSection
   const title = cmsTitle || getValue('partnersSection', 'title');
   const description = cmsDescription || getValue('partnersSection', 'description');
   const partners = payloadData?.partners || [];
-
-  const handleDownloadProfile = () => {
-    if (!profileFileUrl) return;
-    const link = document.createElement('a');
-    link.href = profileFileUrl;
-    link.download = '';
-    link.target = '_blank';
-    link.rel = 'noopener noreferrer';
-    document.body.appendChild(link);
-    link.click();
-    document.body.removeChild(link);
-  };
 
   if (partners.length === 0) {
     return null;
@@ -94,14 +81,15 @@ export const PartnersSection = ({ payloadData, profileFileUrl }: PartnersSection
           ))}
         </div>
 
-        {/* Download Profile Button */}
+        {/* Download Profile Link */}
         <div className={styles.downloadWrapper}>
-          <button
+          <a
+            href={profileFileUrl || '#'}
             className={styles.downloadButton}
-            onClick={handleDownloadProfile}
             aria-label="Download Profile"
-            style={!profileFileUrl ? { opacity: 0.5, cursor: 'default' } : undefined}
-            disabled={!profileFileUrl}
+            style={!profileFileUrl ? { opacity: 0.5, cursor: 'default', pointerEvents: 'none' } : undefined}
+            target="_blank"
+            rel="noopener noreferrer"
           >
             <div className={styles.buttonWrapper}>
               <div className={styles.buttonContent}>
@@ -122,7 +110,7 @@ export const PartnersSection = ({ payloadData, profileFileUrl }: PartnersSection
                 />
               </div>
             </div>
-          </button>
+          </a>
         </div>
       </div>
     </section>
