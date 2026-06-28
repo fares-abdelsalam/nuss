@@ -95,85 +95,6 @@ const imageTweaks: Record<
 
 export const getTeamSection = cache(
   async (locale: Locale): Promise<TeamSectionData> => {
-    const defaultManagers =
-      locale === "ar"
-        ? [
-            {
-              id: "m1",
-              name: "عبد الرحمن البدر",
-              role: "الرئيس التنفيذي",
-              image: "/team-manager-6.webp",
-            },
-            {
-              id: "m2",
-              name: "محمد المحمد",
-              role: "رئيس قطاع المحتوى",
-              image: "/team-manager-5.webp",
-            },
-            {
-              id: "m3",
-              name: "طلال السليمي",
-              role: "رئيس قطاع الحسابات",
-              image: "/team-manager-4.webp",
-            },
-            {
-              id: "m4",
-              name: "مصطفى خليل",
-              role: "رئيس القطاع الفني",
-              image: "/team-manager-3.webp",
-            },
-            {
-              id: "m5",
-              name: "علاء الزور",
-              role: "رئيس القطاع الفني",
-              image: "/team-manager-2.webp",
-            },
-            {
-              id: "m6",
-              name: "أحمد علامة",
-              role: "رئيس قطاع المحاسبة",
-              image: "/team-manager-1.webp",
-            },
-          ]
-        : [
-            {
-              id: "m1",
-              name: "Abdulrahman Al-Badr",
-              role: "CEO",
-              image: "/team-manager-6.webp",
-            },
-            {
-              id: "m2",
-              name: "Mohammed Al-Mohammed",
-              role: "Head of Content",
-              image: "/team-manager-5.webp",
-            },
-            {
-              id: "m3",
-              name: "Talal Al-Sulaimi",
-              role: "Head of Accounts",
-              image: "/team-manager-4.webp",
-            },
-            {
-              id: "m4",
-              name: "Mustafa Khalil",
-              role: "Head of Technical Sector",
-              image: "/team-manager-3.webp",
-            },
-            {
-              id: "m5",
-              name: "Alaa Al-Zour",
-              role: "Head of Technical Sector",
-              image: "/team-manager-2.webp",
-            },
-            {
-              id: "m6",
-              name: "Ahmed Allama",
-              role: "Head of Accounting",
-              image: "/team-manager-1.webp",
-            },
-          ];
-
     const defaultMembers = Array.from({ length: 51 }, (_, i) => {
       const imagePath = `/team-${i + 1}.webp`;
       const tweaks = imageTweaks[imagePath] || {}; // Check if this photo needs fixing
@@ -192,7 +113,7 @@ export const getTeamSection = cache(
         locale === "ar"
           ? "أعمدة نجاح النّص وصنّاع أمجاده"
           : "The pillars of Nuss success and the makers of its glory",
-      managers: defaultManagers,
+      managers: [],
       members: defaultMembers,
     };
 
@@ -219,10 +140,7 @@ export const getTeamSection = cache(
         id: typeof m.id === "string" ? m.id : String(Math.random()),
         name: typeof m.name === "string" ? m.name : "",
         role: typeof m.role === "string" ? m.role : "",
-        image:
-          resolveTeamImage(m) ||
-          defaultManagers.find((dm) => dm.name === m.name)?.image ||
-          "",
+        image: resolveTeamImage(m) || "",
         // PULL THE VALUES FROM THE DATABASE HERE:
         flip: typeof m.flip === "boolean" ? m.flip : false,
         scale: typeof m.scale === "number" ? m.scale : 1,
@@ -242,7 +160,7 @@ export const getTeamSection = cache(
       return {
         title: doc.title || defaultResponse.title,
         description: doc.description || defaultResponse.description,
-        managers: managers.length > 0 ? managers : defaultManagers,
+        managers,
         members: members.length > 0 ? members : defaultMembers,
       };
     } catch (error) {
