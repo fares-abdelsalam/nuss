@@ -84,11 +84,11 @@ const getLocaleHomePageData = async (
 };
 
 export const getHomePageData = cache(async (): Promise<HomePageData> => {
-  // Fetch one locale at a time — ar first, then en
-  // Peak connections = 3 (one batch) × 1 (one locale at a time) = 3 max
-  const result: Partial<HomePageData> = {};
-  for (const locale of i18n.locales) {
-    result[locale] = await getLocaleHomePageData(locale);
-  }
-  return result as HomePageData;
+  // Fetch both locales simultaneously instead of sequentially
+  const [ar, en] = await Promise.all([
+    getLocaleHomePageData("ar"),
+    getLocaleHomePageData("en"),
+  ]);
+
+  return { ar, en };
 });

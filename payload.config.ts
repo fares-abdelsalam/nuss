@@ -56,10 +56,6 @@ let connectionString = rawConnectionString;
 if (connectionString) {
   try {
     const url = new URL(connectionString);
-    // Switch Supabase pooler to transaction mode
-    if (url.hostname.includes("pooler.supabase.com") && url.port === "5432") {
-      url.port = "6543";
-    }
     if (
       url.hostname.includes("pooler.supabase.com") &&
       !url.searchParams.has("pgbouncer")
@@ -186,11 +182,13 @@ export default buildConfig({
   db: postgresAdapter({
     pool: {
       connectionString,
-      max: isVercel ? 2 : 5, // 2 allows batch of 3 to queue without timing out
+      // 3 allows the Promise.all batch of 3 to run simultaneously without queuing
+      max: isVercel ? 3 : 5,
       ssl: { rejectUnauthorized: false },
-      idleTimeoutMillis: isVercel ? 1_000 : 2_000,
+      // Keep connections alive for 10s between requests within the same warm container
+      idleTimeoutMillis: isVercel ? 10_000 : 2_000,
       connectionTimeoutMillis: isVercel ? 8_000 : 10_000,
-      allowExitOnIdle: true,
+      // REMOVED allowExitOnIdle: true
     },
     push:
       typeof process !== "undefined" && process.env.NODE_ENV !== "production"

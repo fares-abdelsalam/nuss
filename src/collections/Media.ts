@@ -2,6 +2,8 @@ import fs from "node:fs";
 import path from "node:path";
 import type { CollectionConfig } from "payload";
 
+const isVercel = typeof process !== "undefined" && process.env.VERCEL === "1";
+
 export const Media: CollectionConfig = {
   slug: "media",
   lockDocuments: false,
@@ -13,11 +15,9 @@ export const Media: CollectionConfig = {
     useAsTitle: "filename",
     defaultColumns: ["filename", "mimeType", "filesize"],
     pagination: {
-      defaultLimit: 10, // keep at 10
-      limits: [10, 25], // don't allow "show all"
+      defaultLimit: 10,
+      limits: [10, 25],
     },
-    // Enables text search in the relationship selector dropdown
-    // so users type a filename to narrow results instead of loading all 110
     listSearchableFields: ["filename"],
   },
   access: {
@@ -27,14 +27,16 @@ export const Media: CollectionConfig = {
     delete: ({ req }) => Boolean(req.user),
   },
   upload: {
-    staticDir: path.resolve(process.cwd(), "./public/media"),
+    // Use /tmp on Vercel because the filesystem is read-only
+    staticDir: isVercel
+      ? path.resolve("/tmp/media")
+      : path.resolve(process.cwd(), "./public/media"),
     mimeTypes: ["image/*", "video/*", "application/pdf"],
     displayPreview: true,
   },
   hooks: {
     afterRead: [
       ({ doc }) => {
-        // If the URL is set to /media/filename but the file actually lives in /public directly, fix the URL
         if (
           doc &&
           typeof doc.url === "string" &&
@@ -42,17 +44,20 @@ export const Media: CollectionConfig = {
         ) {
           const filename = doc.filename;
           if (typeof filename === "string") {
-            const publicPath = path.resolve(
-              process.cwd(),
-              "./public",
-              filename,
-            );
-            if (
-              typeof fs !== "undefined" &&
-              fs.existsSync &&
-              fs.existsSync(publicPath)
-            ) {
-              return { ...doc, url: `/${filename}` };
+            // Only check local filesystem in dev
+            if (!isVercel) {
+              const publicPath = path.resolve(
+                process.cwd(),
+                "./public",
+                filename,
+              );
+              if (
+                typeof fs !== "undefined" &&
+                fs.existsSync &&
+                fs.existsSync(publicPath)
+              ) {
+                return { ...doc, url: `/${filename}` };
+              }
             }
           }
         }

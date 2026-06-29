@@ -96,25 +96,13 @@ export const PartnersSection: CollectionConfig = {
           fields: [
             {
               name: "uploadedLogo",
-              type: "relationship",
+              type: "upload", // Change back to 'upload'
               relationTo: "media",
               required: false,
               admin: {
                 description:
-                  "Select an already-uploaded logo from Media. Upload new logos in the Media collection first.",
+                  "Upload a custom logo. If provided, it will override the base logo selection.",
                 width: "50%",
-                // ↓ KEY FIX: restrict query to images only, with a page limit
-                // This reduces the per-relationship-field query from "all media" to a small set
-                components: {},
-              },
-              // Tells Payload admin to only fetch image/* media items
-              // and to use the collection's defaultLimit (10) not unlimited
-              filterOptions: () => {
-                return {
-                  mimeType: {
-                    contains: "image",
-                  },
-                };
               },
             },
             {

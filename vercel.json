@@ -1,10 +1,10 @@
 {
   "functions": {
     "src/app/(payload)/api/[...slug]/route.ts": {
-      "maxDuration": 30
+      "maxDuration": 60
     },
     "src/app/(site)/page.tsx": {
-      "maxDuration": 15
+      "maxDuration": 30
     }
   },
   "headers": [
