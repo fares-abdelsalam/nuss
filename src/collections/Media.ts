@@ -13,6 +13,9 @@ export const Media: CollectionConfig = {
   admin: {
     useAsTitle: 'filename',
     defaultColumns: ['filename', 'mimeType', 'filesize'],
+    pagination: {
+      defaultLimit: 10,
+    },
   },
   access: {
     read: () => true,
