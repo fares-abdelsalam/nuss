@@ -95,12 +95,11 @@ export const PartnersSection: CollectionConfig = {
           fields: [
             {
               name: "uploadedLogo",
-              type: "upload", // REVERTED TO UPLOAD
-              relationTo: "media",
+              type: "text",
               required: false,
               admin: {
                 description:
-                  "Upload a custom logo. If provided, it will override the base logo selection.",
+                  "Paste the Supabase URL of the logo. Leave empty to use Base Logo.",
                 width: "50%",
               },
             },

@@ -47,6 +47,17 @@ export const getPartnersSection = cache(
   async (locale: Locale): Promise<PartnersSectionData> => {
     try {
       const payload = await getPayloadClient();
+
+      // Fetch all media in ONE query to build a map of ID -> URL
+      const mediaResult = await payload.find({
+        collection: "media",
+        limit: 1000,
+        depth: 0,
+      });
+      const mediaMap = new Map(
+        mediaResult.docs.map((m) => [String(m.id), m.url]),
+      );
+
       const result = await payload.find({
         collection: "partners-section",
         where: {
@@ -60,7 +71,6 @@ export const getPartnersSection = cache(
       });
 
       const doc = (result.docs as unknown as PayloadPartnersDoc[])[0];
-
       if (!doc) {
         return { partners: buildDefaultPartners(), profileFileUrl: null };
       }
@@ -70,18 +80,21 @@ export const getPartnersSection = cache(
           ? doc.profileFile
           : null;
 
-      // Inside getPartnersSection.ts, update the logoUrl logic:
       const partners: Partner[] = (doc.partners || []).map((p) => {
         let logoUrl = "";
 
-        // Expecting an object again
-        if (
-          p.uploadedLogo &&
-          typeof p.uploadedLogo === "object" &&
-          "url" in p.uploadedLogo &&
-          p.uploadedLogo.url
-        ) {
-          logoUrl = p.uploadedLogo.url;
+        // Check if uploadedLogo is a string (could be a URL or an old ID)
+        if (typeof p.uploadedLogo === "string" && p.uploadedLogo.length > 0) {
+          // If it's a URL (starts with http), use it directly
+          if (p.uploadedLogo.startsWith("http")) {
+            logoUrl = p.uploadedLogo;
+          } else {
+            // Otherwise, it's an old ID, so look it up in our media map!
+            const mappedUrl = mediaMap.get(p.uploadedLogo);
+            if (mappedUrl) {
+              logoUrl = mappedUrl;
+            }
+          }
         } else if (typeof p.baseLogo === "string") {
           logoUrl = p.baseLogo;
         }
