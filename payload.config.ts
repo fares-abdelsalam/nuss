@@ -191,9 +191,7 @@ export default buildConfig({
         rejectUnauthorized: false,
       },
       idleTimeoutMillis: isVercel ? 1_000 : 2_000,
-      connectionTimeoutMillis: isVercel ? 3_000 : 10_000,
-      // Allow queries to queue inside the pool rather than fail immediately
-      // when the single connection is busy
+      connectionTimeoutMillis: isVercel ? 8_000 : 10_000, // was 3_000, back up to 8_000
       allowExitOnIdle: true,
     },
     push:
