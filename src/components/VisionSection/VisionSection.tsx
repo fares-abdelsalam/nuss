@@ -144,8 +144,8 @@ export const VisionSection = ({ partners: cmsPartners }: VisionSectionProps) => 
                 <Image
                   src={partner.logo}
                   alt={partner.name}
-                  width={80}
-                  height={32}
+                  width={45}
+                  height={18}
                   loading="lazy"
                   className={styles.partnerLogo}
                 />
@@ -252,8 +252,8 @@ export const VisionSection = ({ partners: cmsPartners }: VisionSectionProps) => 
                 <Image
                   src={partner.logo}
                   alt={partner.name}
-                  width={120}
-                  height={60}
+                  width={70}
+                  height={35}
                   loading="eager"
                   className={styles.partnerLogo}
                 />

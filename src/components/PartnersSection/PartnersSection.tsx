@@ -1,29 +1,33 @@
-'use client';
+"use client";
 
-import React from 'react';
-import Image from 'next/image';
-import { motion } from 'framer-motion';
-import { Text } from '../Text';
-import { RichTextContent } from '../RichTextContent';
-import styles from './PartnersSection.module.css';
-import { useTranslation } from '@/i18n/LocaleContext';
-import type { PartnersSectionData } from '@/i18n/getPartnersSection';
-import { useIsMobile } from '@/hooks/useIsMobile';
+import React from "react";
+import Image from "next/image";
+import { motion } from "framer-motion";
+import { Text } from "../Text";
+import { RichTextContent } from "../RichTextContent";
+import styles from "./PartnersSection.module.css";
+import { useTranslation } from "@/i18n/LocaleContext";
+import type { PartnersSectionData } from "@/i18n/getPartnersSection";
+import { useIsMobile } from "@/hooks/useIsMobile";
 
 interface PartnersSectionProps {
   payloadData?: PartnersSectionData;
   profileFileUrl?: string | null;
 }
 
-export const PartnersSection = ({ payloadData, profileFileUrl }: PartnersSectionProps) => {
+export const PartnersSection = ({
+  payloadData,
+  profileFileUrl,
+}: PartnersSectionProps) => {
   const { getValue, t } = useTranslation();
   const isMobile = useIsMobile();
 
   const cmsTitle = payloadData?.title;
   const cmsDescription = payloadData?.description;
 
-  const title = cmsTitle || getValue('partnersSection', 'title');
-  const description = cmsDescription || getValue('partnersSection', 'description');
+  const title = cmsTitle || getValue("partnersSection", "title");
+  const description =
+    cmsDescription || getValue("partnersSection", "description");
   const partners = payloadData?.partners || [];
 
   if (partners.length === 0) {
@@ -71,8 +75,8 @@ export const PartnersSection = ({ payloadData, profileFileUrl }: PartnersSection
                   <Image
                     src={partner.logo}
                     alt={partner.name}
-                    width={160}
-                    height={80}
+                    width={100}
+                    height={40}
                     className={styles.logo}
                   />
                 </div>
@@ -84,10 +88,14 @@ export const PartnersSection = ({ payloadData, profileFileUrl }: PartnersSection
         {/* Download Profile Link */}
         <div className={styles.downloadWrapper}>
           <a
-            href={profileFileUrl || '#'}
+            href={profileFileUrl || "#"}
             className={styles.downloadButton}
             aria-label="Download Profile"
-            style={!profileFileUrl ? { opacity: 0.5, cursor: 'default', pointerEvents: 'none' } : undefined}
+            style={
+              !profileFileUrl
+                ? { opacity: 0.5, cursor: "default", pointerEvents: "none" }
+                : undefined
+            }
             target="_blank"
             rel="noopener noreferrer"
           >
@@ -96,7 +104,7 @@ export const PartnersSection = ({ payloadData, profileFileUrl }: PartnersSection
                 <div className={styles.buttonBgFill} />
                 <div className={styles.buttonText}>
                   <Text font="zarid" size="md" color="#ffffff" align="center">
-                    {t('portfolioSection', 'downloadProfile')}
+                    {t("portfolioSection", "downloadProfile")}
                   </Text>
                 </div>
               </div>
