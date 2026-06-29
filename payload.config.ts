@@ -182,10 +182,11 @@ export default buildConfig({
   db: postgresAdapter({
     pool: {
       connectionString,
-      max: isVercel ? 10 : 5, // Temporarily increase to 10 to handle the 120-thumbnail burst
+      max: isVercel ? 2 : 5, // MUST be 2 on Vercel!
       ssl: { rejectUnauthorized: false },
-      idleTimeoutMillis: isVercel ? 10_000 : 2_000,
-      connectionTimeoutMillis: isVercel ? 8_000 : 10_000,
+      // MUST be 500ms on Vercel to release connections back to Supabase immediately
+      idleTimeoutMillis: isVercel ? 500 : 2_000,
+      connectionTimeoutMillis: isVercel ? 10_000 : 10_000, // Wait 10s for a connection
     },
     push:
       typeof process !== "undefined" && process.env.NODE_ENV !== "production"
