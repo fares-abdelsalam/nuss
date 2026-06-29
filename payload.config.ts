@@ -133,12 +133,15 @@ export default buildConfig({
   db: postgresAdapter({
     pool: {
       connectionString,
-      max: typeof process !== 'undefined' && process.env.NODE_ENV === 'production' ? 5 : 2,
+      // Production: 10 conns. Dev: 5 conns. Avoids exhausting Supabase 200 limit
+      // when Turbopack HMR orphans connection pools.
+      max: typeof process !== 'undefined' && process.env.NODE_ENV === 'production' ? 10 : 5,
       ssl: {
         rejectUnauthorized: false,
       },
-      // Release idle connections faster to avoid exhausting the pool
-      idleTimeoutMillis: 10_000,
+      // Release idle connections fast (2s) — critical in dev where HMR
+      // can orphan pools that linger until idle timeout.
+      idleTimeoutMillis: 2_000,
       // Don't wait forever for a connection from the pool
       connectionTimeoutMillis: 10_000,
     },
