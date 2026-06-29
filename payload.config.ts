@@ -59,6 +59,12 @@ if (connectionString) {
   }
 }
 
+// On Vercel, serverless functions each get their own pool.
+// Must keep per-instance connections tiny and release fast
+// so PgBouncer can multiplex across many instances without
+// exhausting Supabase's 200-connection limit.
+const isVercel = typeof process !== 'undefined' && process.env.VERCEL === '1';
+
 const Users: CollectionConfig = {
   slug: 'users',
   auth: true,
@@ -133,16 +139,16 @@ export default buildConfig({
   db: postgresAdapter({
     pool: {
       connectionString,
-      // Production: 10 conns. Dev: 5 conns. Avoids exhausting Supabase 200 limit
-      // when Turbopack HMR orphans connection pools.
-      max: typeof process !== 'undefined' && process.env.NODE_ENV === 'production' ? 10 : 5,
+      // Vercel serverless: tiny pool, release to PgBouncer in 500ms.
+      // Prevents 20+ concurrent instances × max = 200+ connections.
+      // Non-Vercel: larger pool (5/5), idle timeout 2s.
+      // Turbopack dev uses globalThis singleton (getPayloadClient.ts)
+      // so pool max here only matters for cold starts.
+      max: isVercel ? 2 : 5,
       ssl: {
         rejectUnauthorized: false,
       },
-      // Release idle connections fast (2s) — critical in dev where HMR
-      // can orphan pools that linger until idle timeout.
-      idleTimeoutMillis: 2_000,
-      // Don't wait forever for a connection from the pool
+      idleTimeoutMillis: isVercel ? 500 : 2_000,
       connectionTimeoutMillis: 10_000,
     },
     push: typeof process !== 'undefined' && process.env.NODE_ENV !== 'production' ? true : process.env.PAYLOAD_SCHEMA_PUSH === 'true',
