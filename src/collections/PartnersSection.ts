@@ -27,6 +27,18 @@ export const PartnersSection: CollectionConfig = {
             key: 'main',
           };
         }
+
+        // Strip full media objects to plain IDs so Payload doesn't re-upload
+        // every partner logo on every save (exhausts Postgres connection pool).
+        if (data?.partners) {
+          data.partners = data.partners.map((partner: Record<string, unknown>) => {
+            if (partner.uploadedLogo && typeof partner.uploadedLogo === 'object' && 'id' in (partner.uploadedLogo as Record<string, unknown>)) {
+              return { ...partner, uploadedLogo: (partner.uploadedLogo as Record<string, unknown>).id };
+            }
+            return partner;
+          });
+        }
+
         return data;
       },
     ],
