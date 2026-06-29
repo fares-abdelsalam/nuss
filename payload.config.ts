@@ -182,10 +182,10 @@ export default buildConfig({
   db: postgresAdapter({
     pool: {
       connectionString,
-      max: isVercel ? 1 : 5, // MUST be 1 on Vercel
+      max: isVercel ? 3 : 5, // 3 is the sweet spot for Vercel
       ssl: { rejectUnauthorized: false },
       idleTimeoutMillis: isVercel ? 10_000 : 2_000,
-      connectionTimeoutMillis: 5_000,
+      connectionTimeoutMillis: 10_000, // Wait 10 seconds for a connection instead of failing
     },
     push:
       typeof process !== "undefined" && process.env.NODE_ENV !== "production"
