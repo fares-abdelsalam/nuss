@@ -139,17 +139,17 @@ export default buildConfig({
   db: postgresAdapter({
     pool: {
       connectionString,
-      // Vercel serverless: tiny pool, release to PgBouncer in 500ms.
-      // Prevents 20+ concurrent instances × max = 200+ connections.
-      // Non-Vercel: larger pool (5/5), idle timeout 2s.
+      // Vercel serverless: 1 conn per instance. 200 concurrent instances
+      // = 200 connections (limit). idleTimeout 500ms releases to PgBouncer fast.
+      // Non-Vercel: pool size 5, idle timeout 2s.
       // Turbopack dev uses globalThis singleton (getPayloadClient.ts)
-      // so pool max here only matters for cold starts.
-      max: isVercel ? 2 : 5,
+      // so pool max only matters for cold starts.
+      max: isVercel ? 1 : 5,
       ssl: {
         rejectUnauthorized: false,
       },
       idleTimeoutMillis: isVercel ? 500 : 2_000,
-      connectionTimeoutMillis: 10_000,
+      connectionTimeoutMillis: isVercel ? 5_000 : 10_000,
     },
     push: typeof process !== 'undefined' && process.env.NODE_ENV !== 'production' ? true : process.env.PAYLOAD_SCHEMA_PUSH === 'true',
   }),
