@@ -139,12 +139,14 @@ export default buildConfig({
   db: postgresAdapter({
     pool: {
       connectionString,
-      // Vercel serverless: 1 conn per instance. 200 concurrent instances
-      // = 200 connections (limit). idleTimeout 500ms releases to PgBouncer fast.
-      // Non-Vercel: pool size 5, idle timeout 2s.
+      // Vercel serverless: 3 conns per instance. Page render needs 5-10
+      // concurrent DB queries (team, services, partners, etc). Pool of 1
+      // causes queue → timeouts.  3 handles concurrency without exhausting
+      // Supabase 200 limit (even 66 instances × 3 = 198).
+      // Non-Vercel: pool 5, idle 2s.
       // Turbopack dev uses globalThis singleton (getPayloadClient.ts)
       // so pool max only matters for cold starts.
-      max: isVercel ? 1 : 5,
+      max: isVercel ? 3 : 5,
       ssl: {
         rejectUnauthorized: false,
       },
