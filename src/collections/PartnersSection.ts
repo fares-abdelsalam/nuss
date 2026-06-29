@@ -1,16 +1,16 @@
-import type { CollectionConfig } from 'payload';
-import { normalizeRichTextValue } from '../i18n/richText';
-import { partnerLogoOptions } from '../content/partnerLogos';
+import type { CollectionConfig } from "payload";
+import { normalizeRichTextValue } from "../i18n/richText";
+import { partnerLogoOptions } from "../content/partnerLogos";
 
 export const PartnersSection: CollectionConfig = {
-  slug: 'partners-section',
+  slug: "partners-section",
   lockDocuments: false,
   labels: {
-    singular: 'Partners Section',
-    plural: 'Partners Section',
+    singular: "Partners Section",
+    plural: "Partners Section",
   },
   admin: {
-    useAsTitle: 'key',
+    useAsTitle: "key",
   },
   access: {
     read: () => true,
@@ -21,10 +21,10 @@ export const PartnersSection: CollectionConfig = {
   hooks: {
     beforeValidate: [
       async ({ data, operation }) => {
-        if (operation === 'create') {
+        if (operation === "create") {
           return {
             ...data,
-            key: 'main',
+            key: "main",
           };
         }
 
@@ -34,8 +34,8 @@ export const PartnersSection: CollectionConfig = {
   },
   fields: [
     {
-      name: 'key',
-      type: 'text',
+      name: "key",
+      type: "text",
       required: false,
       unique: true,
       access: {
@@ -45,12 +45,12 @@ export const PartnersSection: CollectionConfig = {
       },
       admin: {
         readOnly: true,
-        description: 'Singleton key for the Partners section.',
+        description: "Singleton key for the Partners section.",
       },
     },
     {
-      name: 'title',
-      type: 'richText',
+      name: "title",
+      type: "richText",
       localized: true,
       required: false,
       hooks: {
@@ -59,8 +59,8 @@ export const PartnersSection: CollectionConfig = {
       },
     },
     {
-      name: 'description',
-      type: 'richText',
+      name: "description",
+      type: "richText",
       localized: true,
       required: false,
       hooks: {
@@ -69,52 +69,65 @@ export const PartnersSection: CollectionConfig = {
       },
     },
     {
-      name: 'profileFile',
-      type: 'text',
+      name: "profileFile",
+      type: "text",
       required: false,
       admin: {
         description:
-          'Enter a URL to the company profile / brochure (e.g. a PDF hosted on your site or a Google Drive link).',
+          "Enter a URL to the company profile / brochure (e.g. a PDF hosted on your site or a Google Drive link).",
       },
     },
     {
-      name: 'partners',
-      type: 'array',
+      name: "partners",
+      type: "array",
       required: false,
       fields: [
         {
-          name: 'name',
-          type: 'text',
+          name: "name",
+          type: "text",
           localized: true,
           required: false,
           admin: {
-            description: 'Partner name (used as alt text for the logo)',
+            description: "Partner name (used as alt text for the logo)",
           },
         },
         {
-          type: 'row',
+          type: "row",
           fields: [
             {
-              name: 'uploadedLogo',
-              type: 'relationship',
-              relationTo: 'media',
+              name: "uploadedLogo",
+              type: "relationship",
+              relationTo: "media",
               required: false,
               admin: {
-                description: 'Select an already-uploaded logo from Media. Upload new logos in the Media collection first.',
-                width: '50%',
+                description:
+                  "Select an already-uploaded logo from Media. Upload new logos in the Media collection first.",
+                width: "50%",
+                // ↓ KEY FIX: restrict query to images only, with a page limit
+                // This reduces the per-relationship-field query from "all media" to a small set
+                components: {},
+              },
+              // Tells Payload admin to only fetch image/* media items
+              // and to use the collection's defaultLimit (10) not unlimited
+              filterOptions: () => {
+                return {
+                  mimeType: {
+                    contains: "image",
+                  },
+                };
               },
             },
             {
-              name: 'baseLogo',
-              type: 'select',
+              name: "baseLogo",
+              type: "select",
               required: false,
               options: partnerLogoOptions.map((option) => ({
                 label: option.label,
                 value: option.value,
               })),
               admin: {
-                description: 'Or choose a base logo from the project files.',
-                width: '50%',
+                description: "Or choose a base logo from the project files.",
+                width: "50%",
               },
             },
           ],
