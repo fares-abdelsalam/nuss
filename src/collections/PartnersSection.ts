@@ -1,7 +1,6 @@
 import type { CollectionConfig } from "payload";
 import { normalizeRichTextValue } from "../i18n/richText";
 import { partnerLogoOptions } from "../content/partnerLogos";
-import { ServiceImageSelect } from "@/app/(payload)/components/ServiceImageSelect";
 
 export const PartnersSection: CollectionConfig = {
   slug: "partners-section",
@@ -28,7 +27,6 @@ export const PartnersSection: CollectionConfig = {
             key: "main",
           };
         }
-
         return data;
       },
     ],
@@ -97,12 +95,38 @@ export const PartnersSection: CollectionConfig = {
           fields: [
             {
               name: "uploadedLogo",
-              type: "upload",
-              relationTo: "media",
+              type: "text", // Changed to text to stop admin API spam
               required: false,
               admin: {
-                description: "Upload a custom logo.",
+                description:
+                  "Paste the Supabase URL of the logo. Leave empty to use Base Logo.",
                 width: "50%",
+              },
+              hooks: {
+                // THIS IS THE MAGIC: Automatically translates old IDs to URLs for the frontend
+                afterRead: [
+                  async ({ value, req }) => {
+                    if (
+                      value &&
+                      typeof value === "string" &&
+                      /^\d+$/.test(value)
+                    ) {
+                      try {
+                        const media = await req.payload.findByID({
+                          collection: "media",
+                          id: value,
+                          depth: 0,
+                        });
+                        if (media && typeof media.url === "string") {
+                          return media.url;
+                        }
+                      } catch (e) {
+                        return value;
+                      }
+                    }
+                    return value;
+                  },
+                ],
               },
             },
             {

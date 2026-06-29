@@ -1,9 +1,9 @@
-import 'server-only';
+import "server-only";
 
-import { cache } from 'react';
-import type { Locale } from './config';
-import { getPayloadClient } from './getPayloadClient';
-import { partnerLogoOptions } from '../content/partnerLogos';
+import { cache } from "react";
+import type { Locale } from "./config";
+import { getPayloadClient } from "./getPayloadClient";
+import { partnerLogoOptions } from "../content/partnerLogos";
 
 export type Partner = {
   id: string;
@@ -43,57 +43,59 @@ const buildDefaultPartners = (): Partner[] =>
     logo: opt.value,
   }));
 
-export const getPartnersSection = cache(async (locale: Locale): Promise<PartnersSectionData> => {
-  try {
-    const payload = await getPayloadClient();
-    const result = await payload.find({
-      collection: 'partners-section',
-      where: {
-        key: {
-          equals: 'main',
+export const getPartnersSection = cache(
+  async (locale: Locale): Promise<PartnersSectionData> => {
+    try {
+      const payload = await getPayloadClient();
+      const result = await payload.find({
+        collection: "partners-section",
+        where: {
+          key: {
+            equals: "main",
+          },
         },
-      },
-      locale,
-      fallbackLocale: false,
-      depth: 1,
-    });
+        locale,
+        fallbackLocale: false,
+        depth: 1,
+      });
 
-    const doc = (result.docs as unknown as PayloadPartnersDoc[])[0];
+      const doc = (result.docs as unknown as PayloadPartnersDoc[])[0];
 
-    if (!doc) {
-      return { partners: buildDefaultPartners(), profileFileUrl: null };
-    }
-
-    const profileFileUrl = typeof doc.profileFile === 'string' && doc.profileFile.length > 0
-      ? doc.profileFile
-      : null;
-
-    const partners: Partner[] = (doc.partners || []).map((p) => {
-      let logoUrl = '';
-      
-      // Prioritize the uploaded custom logo
-      if (p.uploadedLogo && typeof p.uploadedLogo === 'object' && 'url' in p.uploadedLogo && p.uploadedLogo.url) {
-        logoUrl = p.uploadedLogo.url;
-      } else if (typeof p.baseLogo === 'string') {
-        // Fallback to the base logo from project files
-        logoUrl = p.baseLogo;
+      if (!doc) {
+        return { partners: buildDefaultPartners(), profileFileUrl: null };
       }
 
-      return {
-        id: String(p.id),
-        name: typeof p.name === 'string' ? p.name : '',
-        logo: logoUrl,
-      };
-    });
+      const profileFileUrl =
+        typeof doc.profileFile === "string" && doc.profileFile.length > 0
+          ? doc.profileFile
+          : null;
 
-    return {
-      title: doc.title,
-      description: doc.description,
-      partners,
-      profileFileUrl,
-    };
-  } catch (error) {
-    console.error('Error fetching partners section:', error);
-    return { partners: buildDefaultPartners(), profileFileUrl: null };
-  }
-});
+      const partners: Partner[] = (doc.partners || []).map((p) => {
+        let logoUrl = "";
+
+        // Since uploadedLogo is now a text string (URL)
+        if (typeof p.uploadedLogo === "string" && p.uploadedLogo.length > 0) {
+          logoUrl = p.uploadedLogo;
+        } else if (typeof p.baseLogo === "string") {
+          logoUrl = p.baseLogo;
+        }
+
+        return {
+          id: String(p.id),
+          name: typeof p.name === "string" ? p.name : "",
+          logo: logoUrl,
+        };
+      });
+
+      return {
+        title: doc.title,
+        description: doc.description,
+        partners,
+        profileFileUrl,
+      };
+    } catch (error) {
+      console.error("Error fetching partners section:", error);
+      return { partners: buildDefaultPartners(), profileFileUrl: null };
+    }
+  },
+);
