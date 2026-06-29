@@ -182,11 +182,10 @@ export default buildConfig({
   db: postgresAdapter({
     pool: {
       connectionString,
-      max: isVercel ? 2 : 5, // MUST be 2 on Vercel!
+      max: isVercel ? 1 : 5, // MUST be 1 on Vercel
       ssl: { rejectUnauthorized: false },
-      // MUST be 500ms on Vercel to release connections back to Supabase immediately
-      idleTimeoutMillis: isVercel ? 500 : 2_000,
-      connectionTimeoutMillis: isVercel ? 10_000 : 10_000, // Wait 10s for a connection
+      idleTimeoutMillis: isVercel ? 10_000 : 2_000,
+      connectionTimeoutMillis: 5_000,
     },
     push:
       typeof process !== "undefined" && process.env.NODE_ENV !== "production"

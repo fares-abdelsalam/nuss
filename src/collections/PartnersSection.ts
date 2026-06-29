@@ -95,38 +95,13 @@ export const PartnersSection: CollectionConfig = {
           fields: [
             {
               name: "uploadedLogo",
-              type: "text", // Changed to text to stop admin API spam
+              type: "upload", // REVERTED TO UPLOAD
+              relationTo: "media",
               required: false,
               admin: {
                 description:
-                  "Paste the Supabase URL of the logo. Leave empty to use Base Logo.",
+                  "Upload a custom logo. If provided, it will override the base logo selection.",
                 width: "50%",
-              },
-              hooks: {
-                // THIS IS THE MAGIC: Automatically translates old IDs to URLs for the frontend
-                afterRead: [
-                  async ({ value, req }) => {
-                    if (
-                      value &&
-                      typeof value === "string" &&
-                      /^\d+$/.test(value)
-                    ) {
-                      try {
-                        const media = await req.payload.findByID({
-                          collection: "media",
-                          id: value,
-                          depth: 0,
-                        });
-                        if (media && typeof media.url === "string") {
-                          return media.url;
-                        }
-                      } catch (e) {
-                        return value;
-                      }
-                    }
-                    return value;
-                  },
-                ],
               },
             },
             {

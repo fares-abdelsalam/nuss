@@ -70,12 +70,18 @@ export const getPartnersSection = cache(
           ? doc.profileFile
           : null;
 
+      // Inside getPartnersSection.ts, update the logoUrl logic:
       const partners: Partner[] = (doc.partners || []).map((p) => {
         let logoUrl = "";
 
-        // Since uploadedLogo is now a text string (URL)
-        if (typeof p.uploadedLogo === "string" && p.uploadedLogo.length > 0) {
-          logoUrl = p.uploadedLogo;
+        // Expecting an object again
+        if (
+          p.uploadedLogo &&
+          typeof p.uploadedLogo === "object" &&
+          "url" in p.uploadedLogo &&
+          p.uploadedLogo.url
+        ) {
+          logoUrl = p.uploadedLogo.url;
         } else if (typeof p.baseLogo === "string") {
           logoUrl = p.baseLogo;
         }
