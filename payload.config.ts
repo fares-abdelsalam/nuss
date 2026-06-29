@@ -186,12 +186,10 @@ export default buildConfig({
   db: postgresAdapter({
     pool: {
       connectionString,
-      max: isVercel ? 1 : 5,
-      ssl: {
-        rejectUnauthorized: false,
-      },
+      max: isVercel ? 2 : 5, // 2 allows batch of 3 to queue without timing out
+      ssl: { rejectUnauthorized: false },
       idleTimeoutMillis: isVercel ? 1_000 : 2_000,
-      connectionTimeoutMillis: isVercel ? 8_000 : 10_000, // was 3_000, back up to 8_000
+      connectionTimeoutMillis: isVercel ? 8_000 : 10_000,
       allowExitOnIdle: true,
     },
     push:

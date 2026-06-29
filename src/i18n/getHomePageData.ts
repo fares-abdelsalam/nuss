@@ -45,19 +45,29 @@ export type HomePageData = Localized<HomePageLocaleData>;
 const getLocaleHomePageData = async (
   locale: Locale,
 ): Promise<HomePageLocaleData> => {
-  // Sequential fetches — one connection at a time through the single-slot pool.
-  // Slower than Promise.all by ~200-400ms on warm instances, but prevents
-  // 18 simultaneous connection attempts on cold starts from exhausting Supabase.
+  // Dictionary first — needed by journeySection and journeys
   const dictionary = await getDictionary(locale);
-  const services = await getServices(locale);
-  const businessModels = await getBusinessModels(locale);
-  const journeySection = await getJourneySection(locale, dictionary);
-  const journeys = await getJourneys(locale, dictionary);
-  const methodologyData = await getMethodologySection(locale);
-  const portfolioData = await getPortfolioSection(locale);
-  const partnersData = await getPartnersSection(locale);
-  const footerData = await getFooterSection(locale);
-  const teamData = await getTeamSection(locale);
+
+  // Batch 1: first 3 independent queries (3 connections max simultaneously)
+  const [services, businessModels, methodologyData] = await Promise.all([
+    getServices(locale),
+    getBusinessModels(locale),
+    getMethodologySection(locale),
+  ]);
+
+  // Batch 2: next 3
+  const [portfolioData, partnersData, footerData] = await Promise.all([
+    getPortfolioSection(locale),
+    getPartnersSection(locale),
+    getFooterSection(locale),
+  ]);
+
+  // Batch 3: remaining (these use dictionary so kept separate)
+  const [journeySection, journeys, teamData] = await Promise.all([
+    getJourneySection(locale, dictionary),
+    getJourneys(locale, dictionary),
+    getTeamSection(locale),
+  ]);
 
   return {
     businessModels,
@@ -74,8 +84,8 @@ const getLocaleHomePageData = async (
 };
 
 export const getHomePageData = cache(async (): Promise<HomePageData> => {
-  // Fetch locales one after the other, not in parallel.
-  // Two locales × 10 sequential queries = 20 total, but only 1 connection used at any moment.
+  // Fetch one locale at a time — ar first, then en
+  // Peak connections = 3 (one batch) × 1 (one locale at a time) = 3 max
   const result: Partial<HomePageData> = {};
   for (const locale of i18n.locales) {
     result[locale] = await getLocaleHomePageData(locale);
