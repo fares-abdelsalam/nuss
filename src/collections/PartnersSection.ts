@@ -1,6 +1,7 @@
 import type { CollectionConfig } from "payload";
 import { normalizeRichTextValue } from "../i18n/richText";
 import { partnerLogoOptions } from "../content/partnerLogos";
+import { ServiceImageSelect } from "@/app/(payload)/components/ServiceImageSelect";
 
 export const PartnersSection: CollectionConfig = {
   slug: "partners-section",
@@ -96,12 +97,11 @@ export const PartnersSection: CollectionConfig = {
           fields: [
             {
               name: "uploadedLogo",
-              type: "upload", // Change back to 'upload'
+              type: "upload",
               relationTo: "media",
               required: false,
               admin: {
-                description:
-                  "Upload a custom logo. If provided, it will override the base logo selection.",
+                description: "Upload a custom logo.",
                 width: "50%",
               },
             },

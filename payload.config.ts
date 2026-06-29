@@ -182,13 +182,10 @@ export default buildConfig({
   db: postgresAdapter({
     pool: {
       connectionString,
-      // 3 allows the Promise.all batch of 3 to run simultaneously without queuing
-      max: isVercel ? 3 : 5,
+      max: isVercel ? 10 : 5, // Temporarily increase to 10 to handle the 120-thumbnail burst
       ssl: { rejectUnauthorized: false },
-      // Keep connections alive for 10s between requests within the same warm container
       idleTimeoutMillis: isVercel ? 10_000 : 2_000,
       connectionTimeoutMillis: isVercel ? 8_000 : 10_000,
-      // REMOVED allowExitOnIdle: true
     },
     push:
       typeof process !== "undefined" && process.env.NODE_ENV !== "production"
