@@ -70,6 +70,7 @@ export const PartnersSection: CollectionConfig = {
     {
       name: "profileFile",
       type: "text",
+      localized: true,
       required: false,
       admin: {
         description:
