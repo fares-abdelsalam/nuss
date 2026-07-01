@@ -82,23 +82,16 @@ export const getPartnersSection = cache(
 
       const partners: Partner[] = (doc.partners || []).map((p) => {
         let logoUrl = "";
-
-        // Check if uploadedLogo is a string (could be a URL or an old ID)
-        if (typeof p.uploadedLogo === "string" && p.uploadedLogo.length > 0) {
-          // If it's a URL (starts with http), use it directly
-          if (p.uploadedLogo.startsWith("http")) {
-            logoUrl = p.uploadedLogo;
-          } else {
-            // Otherwise, it's an old ID, so look it up in our media map!
-            const mappedUrl = mediaMap.get(p.uploadedLogo);
-            if (mappedUrl) {
-              logoUrl = mappedUrl;
-            }
-          }
+        if (
+          p.uploadedLogo &&
+          typeof p.uploadedLogo === "object" &&
+          "url" in p.uploadedLogo &&
+          p.uploadedLogo.url
+        ) {
+          logoUrl = p.uploadedLogo.url;
         } else if (typeof p.baseLogo === "string") {
           logoUrl = p.baseLogo;
         }
-
         return {
           id: String(p.id),
           name: typeof p.name === "string" ? p.name : "",

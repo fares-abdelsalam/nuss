@@ -6,8 +6,8 @@
   width: 100%;
   position: sticky;
   top: 0;
-  z-index: 50;
-  /* background-color: rgba(251, 245, 243, 0.5); */
+  z-index: 70;
+  background-color: rgba(251, 245, 243, 0.92);
   backdrop-filter: blur(16px);
   /* -webkit-backdrop-filter: blur(16px); */
 }
@@ -16,7 +16,10 @@
 .navbar img,
 .navLink,
 .languageContainer {
-  transition: color 0.25s ease, filter 0.25s ease, opacity 0.2s ease;
+  transition:
+    color 0.25s ease,
+    filter 0.25s ease,
+    opacity 0.2s ease;
 }
 
 .logoContainer {
@@ -34,8 +37,10 @@
 }
 
 .navLink {
-  transition: opacity 0.2s ease, color 0.2s ease;
-  color: #706F6F;
+  transition:
+    opacity 0.2s ease,
+    color 0.2s ease;
+  color: #706f6f;
   background: none;
   border: none;
   cursor: pointer;
@@ -48,7 +53,7 @@
 }
 
 .navLinkActive {
-  color: #1E1E1E !important;
+  color: #1e1e1e !important;
   opacity: 1 !important;
 }
 
@@ -63,7 +68,11 @@
   justify-self: end;
   grid-column: 3;
   cursor: pointer;
-  color: #706F6F;
+  color: #706f6f;
+}
+
+.navbarDark {
+  background-color: rgba(0, 0, 0, 0.92);
 }
 
 .navbarDark .navLink,
@@ -80,6 +89,111 @@
   filter: invert(1);
 }
 
+.hamburger {
+  display: none;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  width: 32px;
+  height: 32px;
+  background: none;
+  border: none;
+  cursor: pointer;
+  padding: 0;
+  z-index: 71;
+  position: relative;
+}
+
+.hamburger span {
+  display: block;
+  width: 22px;
+  height: 2px;
+  background-color: #1e1e1e;
+  border-radius: 2px;
+  transition: all 0.3s ease;
+  position: absolute;
+}
+
+.hamburger span:nth-child(1) {
+  transform: translateY(-6px);
+}
+
+.hamburger span:nth-child(2) {
+  transform: translateY(0);
+}
+
+.hamburger span:nth-child(3) {
+  transform: translateY(6px);
+}
+
+.hamburgerOpen span:nth-child(1) {
+  transform: translateY(0) rotate(45deg);
+}
+
+.hamburgerOpen span:nth-child(2) {
+  opacity: 0;
+}
+
+.hamburgerOpen span:nth-child(3) {
+  transform: translateY(0) rotate(-45deg);
+}
+
+.navbarDark .hamburger span {
+  background-color: rgba(255, 255, 255, 0.72);
+}
+
+.sidebarOverlay {
+  position: fixed;
+  inset: 0;
+  background-color: rgba(0, 0, 0, 0.55);
+  backdrop-filter: blur(10px);
+  -webkit-backdrop-filter: blur(10px);
+  z-index: 60;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.sidebarContent {
+  position: relative;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  padding: 2rem;
+}
+
+.sidebarLinks {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 0.5rem;
+}
+
+.sidebarLink {
+  background: none;
+  border: none;
+  cursor: pointer;
+  text-align: center;
+  padding: 0.75rem 2rem;
+  color: rgba(255, 255, 255, 0.95);
+  font: inherit;
+  border-radius: 8px;
+  transition:
+    background-color 0.2s ease,
+    color 0.2s ease;
+}
+
+.sidebarLink:hover,
+.sidebarLink:active {
+  background-color: rgba(255, 255, 255, 0.1);
+  color: #ffffff;
+}
+
+.sidebarLinkActive {
+  color: #ffffff !important;
+  font-weight: 600;
+}
+
 @media (max-width: 768px) {
   .navbar {
     display: flex;
@@ -88,11 +202,8 @@
     padding: 1.5rem 2rem;
   }
 
-  /* Fixed spacer to balance the layout and keep logo centered */
-  .navbar::before {
-    content: "";
-    width: 60px; /* Approximate width of language container */
-    display: block;
+  .hamburger {
+    display: flex;
   }
 
   .logoContainer {
@@ -103,7 +214,7 @@
     left: 50%;
     transform: translateX(-50%);
   }
-  
+
   .navLinks {
     display: none;
   }

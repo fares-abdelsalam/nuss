@@ -45,25 +45,27 @@ export type HomePageData = Localized<HomePageLocaleData>;
 const getLocaleHomePageData = async (
   locale: Locale,
 ): Promise<HomePageLocaleData> => {
-  // Dictionary first — needed by journeySection and journeys
+  // 1. Fetch dictionary first (because journeys depend on it)
   const dictionary = await getDictionary(locale);
 
-  // Batch 1: first 3 independent queries (3 connections max simultaneously)
-  const [services, businessModels, methodologyData] = await Promise.all([
+  // 2. Fire ALL remaining 9 queries at the EXACT same time!
+  const [
+    services,
+    businessModels,
+    methodologyData,
+    portfolioData,
+    partnersData,
+    footerData,
+    journeySection,
+    journeys,
+    teamData,
+  ] = await Promise.all([
     getServices(locale),
     getBusinessModels(locale),
     getMethodologySection(locale),
-  ]);
-
-  // Batch 2: next 3
-  const [portfolioData, partnersData, footerData] = await Promise.all([
     getPortfolioSection(locale),
     getPartnersSection(locale),
     getFooterSection(locale),
-  ]);
-
-  // Batch 3: remaining (these use dictionary so kept separate)
-  const [journeySection, journeys, teamData] = await Promise.all([
     getJourneySection(locale, dictionary),
     getJourneys(locale, dictionary),
     getTeamSection(locale),

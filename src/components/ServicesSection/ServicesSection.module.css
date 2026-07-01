@@ -102,16 +102,12 @@
 }
 
 .cardsGrid {
-  display: flex;
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
   gap: 2rem;
   padding: 0 4rem 1rem 4rem;
   margin: 0 auto;
   align-items: stretch;
-  scrollbar-width: none;
-  /* Firefox */
-  cursor: auto;
-  overflow-x: auto;
-  scroll-behavior: smooth;
 }
 
 .cardsGrid::-webkit-scrollbar {
@@ -125,6 +121,7 @@
   }
 
   .cardsGrid {
+    display: flex;
     padding: 0;
     gap: 24px;
     overflow-x: auto;
@@ -134,6 +131,12 @@
 .cardsGrid::-webkit-scrollbar {
   display: none;
   /* Chrome, Safari, Opera */
+}
+
+@media (min-width: 481px) {
+  .navigation {
+    display: none;
+  }
 }
 
 .card {
@@ -215,7 +218,7 @@ html[dir="ltr"] .titleText {
 }
 
 .openTitleWrapper {
-  margin-bottom: 2rem;
+  margin-bottom: 0.75rem;
 }
 
 .openTitle {
@@ -275,11 +278,13 @@ html[dir="ltr"] .titleText {
   }
 
   .cardsGrid {
+    display: flex;
     padding: 0 1.5rem 2rem 1.5rem;
     margin: 0;
     width: 100%;
     gap: 1.5rem;
     scroll-snap-type: x mandatory;
+    overflow-x: auto;
   }
 
   .card {
@@ -328,7 +333,7 @@ html[dir="ltr"] .titleText {
   }
 
   .cardsGrid {
-    grid-template-columns: 1fr;
+    grid-template-columns: repeat(2, 1fr);
     padding: 0 2rem;
   }
 }
