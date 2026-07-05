@@ -91,6 +91,7 @@ const Users: CollectionConfig = {
 };
 
 export default buildConfig({
+  serverURL: "https://nuss.sa",
   editor: lexicalEditor({}),
   upload: {
     limits: {

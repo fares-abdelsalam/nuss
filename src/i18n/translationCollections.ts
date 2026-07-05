@@ -28,8 +28,7 @@ export const translationFields: CollectionConfig['fields'] = [
       update: () => false,
     },
     admin: {
-      readOnly: true,
-      description: 'Managed from the translation source files and seed script.',
+      description: 'Key used to look up this translation. Cannot be changed after creation.',
     },
   },
   {
@@ -58,7 +57,7 @@ export const createTranslationCollection = (section: TranslationSection): Collec
   },
   access: {
     read: () => true,
-    create: () => false,
+    create: ({ req }) => Boolean(req.user),
     update: ({ req }) => Boolean(req.user),
     delete: ({ req }) => Boolean(req.user),
   },
