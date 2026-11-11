@@ -7,6 +7,7 @@
     "build": "next build",
     "start": "next start",
     "lint": "eslint",
+    "test:integration": "node --import tsx --test tests/http-integration.test.ts",
     "seed:dictionaries": "node scripts/seed-dictionaries.mjs",
     "schema:push": "node scripts/seed-dictionaries.mjs --schema-only"
   },
