@@ -92,7 +92,13 @@ const Users: CollectionConfig = {
 
 export default buildConfig({
   serverURL: "https://nuss.sa",
-  csrf: ["https://nuss.sa", "https://www.nuss.sa"],
+  csrf: [
+    "https://nuss.sa",
+    "https://www.nuss.sa",
+    "https://nuss-psi.vercel.app",
+    "https://nuss-farooses-projects.vercel.app",
+    "https://nuss-git-main-farooses-projects.vercel.app",
+  ],
   editor: lexicalEditor({}),
   upload: {
     limits: {
