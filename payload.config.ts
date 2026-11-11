@@ -190,7 +190,7 @@ export default buildConfig({
   db: postgresAdapter({
     pool: {
       connectionString,
-      max: isVercel ? 1 : 5, // one connection per lambda holding against Supabase's 200-client cap
+      max: isVercel ? 2 : 5, // two connections per lambda holding against Supabase's 200-client cap
       ssl: { rejectUnauthorized: false },
       idleTimeoutMillis: isVercel ? 1_000 : 2_000,
       connectionTimeoutMillis: 30_000, // queries queue on one connection when a page fans out
