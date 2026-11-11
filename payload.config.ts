@@ -190,9 +190,9 @@ export default buildConfig({
   db: postgresAdapter({
     pool: {
       connectionString,
-      max: isVercel ? 3 : 5, // 3 is the sweet spot for Vercel
+      max: isVercel ? 1 : 5, // One connection per function instance on Vercel
       ssl: { rejectUnauthorized: false },
-      idleTimeoutMillis: isVercel ? 10_000 : 2_000,
+      idleTimeoutMillis: isVercel ? 1_000 : 2_000,
       connectionTimeoutMillis: 10_000, // Wait 10 seconds for a connection instead of failing
     },
     push:
