@@ -92,6 +92,7 @@ const Users: CollectionConfig = {
 
 export default buildConfig({
   serverURL: "https://nuss.sa",
+  csrf: ["https://nuss.sa", "https://www.nuss.sa"],
   editor: lexicalEditor({}),
   upload: {
     limits: {
